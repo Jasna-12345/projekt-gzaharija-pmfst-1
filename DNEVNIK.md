@@ -10,3 +10,6 @@ Dovršena prva faza projekta.
 ## 23.12.2021.
 ### Kratki opis promjena
 Napravio sam navigaciju
+
+## 12.01.2023.
+Opis projekta
