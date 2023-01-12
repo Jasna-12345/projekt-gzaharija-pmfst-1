@@ -8,12 +8,12 @@
 
 # Opis projekta
 ## Kratki opis
-Ovdje ide opis projekta
+Aplikacija za evidenciju diplomskih i završnih radova. Dozvovljavaa unos novih radova, filtirrane. Sastoji se od tri ekrana - unos, prikaz, detalji...
 
 ## Popis funkcionalnosti
-1. a
-2. b
-3. c
+1. Dodavanje novih
+2. Filtiranje
+3. Brisanje
 
 
 ## UPUTE
