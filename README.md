@@ -8,13 +8,20 @@
 
 # Opis projekta
 ## Kratki opis
-Aplikacija za evidenciju diplomskih i završnih radova. Dozvovljavaa unos novih radova, filtirrane. Sastoji se od tri ekrana - unos, prikaz, detalji...
+Aplikacija za evidenciju artikala, prehrambenih proizvoda jednog skladišta. Dozvovljavaa unos novih radova, filtirrane. Sastoji se od tri ekrana - unos, prikaz, detalji...
+Aplikacija će predstavljati skladište proizvoda, artikala trgovine prehrambenih proizvoda. Korisnik će imati mogućnost dodavanja novih proizvoda, mogućnost pretrage proizvoda te narudžbu određenih proizvoda, u jednu od poslovnica skladišta. Svaki od proizvoda će imati ime, cijenu nabave te cijenu po kojoj je isti plasiran na tržište od stane vlasnika skladišta, te količinu, kako bi korisnik imao uvid u broj trenutno dostupnih proizvoda na stanju(u skladištu). Korisniku će biti omogućen pregled stanja na skladištu, sukladno vrsti proizvoda, te će imati mogućnost pretrage istih po nazivu. Ukoliko se u međuvremenu pojavila određena poslovnica koja prethodno nije smatrana poslovnicom našeg skladišta, korisnik će ju moći dodati. Također, ukoliko neka od poslovnica trenutno ne posluje dobro, vlasnik ju je odlučio zatvoriti, te korisnik ima mogućnost brisanja iste, budući da ne crpi artikle koji se tenutno nalaze na stanju.
 
 ## Popis funkcionalnosti
 1. Dodavanje novih
 2. Filtiranje
 3. Brisanje
 
+1. Mogućnost unosa novog proizvoda 
+2. Mogućnost pregleda proizvoda na stanju(u skladištu)
+3. Mogućnost pregleda prodanih proizvoda te ukupna zarada 
+4. Mogućnost pretrage konkretnih proizvoda prema nazivu
+5. Mogućnost dodavanja nove poslovnice unutar skladišta
+6. Mogućnost brisanja poslovnice zbog lošeg poslovanja
 
 ## UPUTE
 ## Opis projekta
