@@ -1,12 +1,23 @@
+//biblioteka koja nam omogućuje korištenje navigacije
+import "react-native-gesture-handler";
+
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import {createDrawerNavigator} from "@react-navigation/drawer";
+import DrawerPocetnaScreen from "./screens/DrawerPocetnaScreen.js"
+import DrawerPoslovniceScreen from "./screens/DrawerPoslovniceScreen";
+
+const Drawer=createDrawerNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Pocetna verzija aplikacije</Text>
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen name="DrawerPocetna" component={DrawerPocetnaScreen}/>
+        <Drawer.Screen name="DrawerPoslovnice" component={DrawerPoslovniceScreen}/>
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
 
