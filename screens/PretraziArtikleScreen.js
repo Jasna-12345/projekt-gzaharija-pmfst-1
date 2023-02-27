@@ -1,8 +1,10 @@
-import {View,Text} from "react-native";
+import {View,Text,Button} from "react-native";
 
-const PretraziArtikleScreen=()=>{
+
+const PretraziArtikleScreen=({route,navigation})=>{
     return(<View>
         <Text>Korisnik ima mogućnost pretrage artikala(make-up proizvoda)</Text>
+        <Button onPress={()=>navigation.navigate('ProdajaArtikla')} title="Prodaj artikal"></Button>
     </View>)
 }
 
