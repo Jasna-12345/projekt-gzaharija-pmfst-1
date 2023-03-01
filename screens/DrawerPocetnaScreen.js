@@ -5,6 +5,7 @@ import OtvoriPoslovnicuScreen from "./OtvoriPoslovnicuScreen";
 import PocetnaScreen from "./PocetnaScreen";
 //import PretraziArtikleScreen from "./PretraziArtikleScreen";
 import TabPretraziArtikle from "./TabPretraziArtikle";
+import { headerOpcije } from "../components/headerOpcije";
 
 const Tab=createBottomTabNavigator();
 
@@ -14,10 +15,13 @@ const DrawerPocetnaScreen=({route, navigation})=>{
         //<Text>Početna stranica skladišta trgovina make-up proizvoda</Text>
         //</View>
         <Tab.Navigator>
-            <Tab.Screen name="TabPocetna" component={PocetnaScreen}  ></Tab.Screen>
-            <Tab.Screen name="TabNaruciArtikal" component={NaruciArtikalScreen}  ></Tab.Screen>
-            <Tab.Screen name="TabOtvoriPoslovnicu" component={OtvoriPoslovnicuScreen}  ></Tab.Screen>
-            <Tab.Screen name="TabPrikaziArtikle" component={TabPretraziArtikle}  ></Tab.Screen>
+            {/*Ova 3 ekrana su nam obični ekrani, dok nam je TabPrikaziArtikle stack navigator*/}
+            <Tab.Screen name="TabPocetna" component={PocetnaScreen} options={headerOpcije}></Tab.Screen>
+            <Tab.Screen name="TabNaruciArtikal" component={NaruciArtikalScreen} options={headerOpcije} ></Tab.Screen>
+            <Tab.Screen name="TabOtvoriPoslovnicu" component={OtvoriPoslovnicuScreen} options={headerOpcije} ></Tab.Screen>
+            {/*Trebamo sakriti header od TAB navigacije, jer nam je taj screen stack navigator i još trebamo prikazati header od stack navigatora*/}
+            {/*A to cemo implementirati u screen-u TabPretraziArtikle*/}
+            <Tab.Screen name="TabPrikaziArtikle" component={TabPretraziArtikle} options={{headerShown:false}} ></Tab.Screen>
         </Tab.Navigator>
 )
 }
