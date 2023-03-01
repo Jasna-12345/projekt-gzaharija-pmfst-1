@@ -9,7 +9,7 @@ import { headerOpcije } from "../components/headerOpcije";
 
 const Tab=createBottomTabNavigator();
 
-const DrawerPocetnaScreen=({route, navigation})=>{
+const DrawerPocetnaScreen=()=>{
     return(
         //<View>
         //<Text>Početna stranica skladišta trgovina make-up proizvoda</Text>

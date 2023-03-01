@@ -7,6 +7,7 @@ import PregledSkladistaScreen from "./PregledSkladistaScreen";
 import ProdajArtikalScreen from "./ProdajArtikalScreen";
 import UrediPoslovnicuScreen from "./UrediPoslovnicuScreen";
 import ZatvoriPoslovnicuScreen from "./ZatvoriPoslovnicuScreen";
+import { headerOpcije } from "../components/headerOpcije";
 
 //Poslovnice - nam je stack navigator, koji nas vodi na ekrane
 //        1. Popis poslovnica
@@ -20,7 +21,7 @@ const Stack=createNativeStackNavigator();
 
 const DrawerPoslovniceScreen=()=>{
     return(
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={headerOpcije}>
         <Stack.Screen name="PopisPoslovnica" component={PopisPoslovnicaScreen}/>
         <Stack.Screen name="DetaljiPoslovnice" component={DetaljiPoslovniceScreen}/>
         <Stack.Screen name="UrediPoslovnicu" component={UrediPoslovnicuScreen}/>
