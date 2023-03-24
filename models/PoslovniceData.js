@@ -10,6 +10,6 @@ const POSLOVNICE_TEST = [new Poslovnica(0, "POSLOVNICA 1", "p1@tvrtka.com", "Spl
  new Poslovnica(4, "POSLOVNICA 5", "p5@tvrtka.com", "Čakovec", ARTIKLI_TEST),
  new Poslovnica(5, "POSLOVNICA 6", "p6@tvrtka.com", "Umag", ARTIKLI_TEST),
  new Poslovnica(6, "POSLOVNICA 7", "p7@tvrtka.com", "Koprivnica", ARTIKLI_TEST),
- new Poslovnica(7, "POSLOVNICA 8", "p8@tvrtka.com", "Poreč", ARTIKLI_TEST)];
+new Poslovnica(7, "POSLOVNICA 8", "p8@tvrtka.com", "Poreč", ARTIKLI_TEST)];
 
 export default POSLOVNICE_TEST;
