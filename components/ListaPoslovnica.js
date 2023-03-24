@@ -12,9 +12,11 @@ const Poslovnica=({poslovnica,navigation})=>{
 
     return (<View>
         <Text style={{fontSize:24}}>{poslovnica.naziv}</Text>
-        <Button onPress={()=>navigation.navigate('DetaljiPoslovnice')} title="Detalji poslovnice"></Button>
-        <Button onPress={()=>navigation.navigate('PregledSkladista')} title="Pregled skladišta"></Button>
-        <Button onPress={()=>navigation.navigate('ZatvoriPoslovnicu')} title="Zatvori poslovnicu"></Button>
+        {/*{id_poslovnice: poslovnica.id} --> sada konkretno znamo za koju poslovnicu mi želimo vidjeti detalje(1.button), pregledati skladište
+        (2.button) ili eventualno želimo zatvoriti poslovnicu(3.button). */}
+        <Button onPress={()=>navigation.navigate('DetaljiPoslovnice', {id_poslovnice: poslovnica.id})} title="Detalji poslovnice"></Button>
+        <Button onPress={()=>navigation.navigate('PregledSkladista', {id_poslovnice: poslovnica.id})} title="Pregled skladišta"></Button>
+        <Button onPress={()=>navigation.navigate('ZatvoriPoslovnicu', {id_poslovnice: poslovnica.id})} title="Zatvori poslovnicu"></Button>
     </View>)
 }
 
