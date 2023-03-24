@@ -8,18 +8,23 @@ import {createDrawerNavigator} from "@react-navigation/drawer";
 import DrawerPocetnaScreen from "./screens/DrawerPocetnaScreen.js"
 import DrawerPoslovniceScreen from "./screens/DrawerPoslovniceScreen";
 import { BaseButton } from "react-native-gesture-handler";
+import { Provider } from "react-redux";
+import { store } from "./stores/store";
+
 
 const Drawer=createDrawerNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      {/*Želimo sakriti header drawer navigacije*/}
-      <Drawer.Navigator screenOptions={{headerShown: false}}>
-        <Drawer.Screen name="DrawerPocetna" component={DrawerPocetnaScreen}/>
-        <Drawer.Screen name="DrawerPoslovnice" component={DrawerPoslovniceScreen}/>
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        {/*Želimo sakriti header drawer navigacije*/}
+        <Drawer.Navigator screenOptions={{headerShown: false}}>
+          <Drawer.Screen name="DrawerPocetna" component={DrawerPocetnaScreen}/>
+          <Drawer.Screen name="DrawerPoslovnice" component={DrawerPoslovniceScreen}/>
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
