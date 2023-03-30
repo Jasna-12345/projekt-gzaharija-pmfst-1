@@ -9,8 +9,8 @@ const Stack=createNativeStackNavigator();
 const TabPretraziArtikle=({route,navigation})=>{
     return(
     <Stack.Navigator screenOptions={headerOpcije}>
-        <Stack.Screen name="PretraziArtikle" component={PretraziArtikleScreen}/>
-        <Stack.Screen name="ProdajaArtikla" component={ProdajaArtiklaScreen}/>
+        <Stack.Screen name="PretraziArtikle" component={PretraziArtikleScreen} options={{title: "Pretraži Artikle"}}/>
+        <Stack.Screen name="ProdajaArtikla" component={ProdajaArtiklaScreen} options={{title: "Prodaja Artikla"}}/>
     </Stack.Navigator>)
 }
 

@@ -22,13 +22,14 @@ const Stack=createNativeStackNavigator();
 const DrawerPoslovniceScreen=()=>{
     return(
     <Stack.Navigator screenOptions={headerOpcije}>
-        <Stack.Screen name="PopisPoslovnica" component={PopisPoslovnicaScreen}/>
-        <Stack.Screen name="DetaljiPoslovnice" component={DetaljiPoslovniceScreen}/>
-        <Stack.Screen name="UrediPoslovnicu" component={UrediPoslovnicuScreen}/>
-        <Stack.Screen name="PregledSkladista" component={PregledSkladistaScreen}/>
-        <Stack.Screen name="ProdajArtikal" component={ProdajArtikalScreen}/>
-        <Stack.Screen name="PrebaciArtikal" component={PrebaciArtikalScreen}/>
-        <Stack.Screen name="ZatvoriPoslovnicu" component={ZatvoriPoslovnicuScreen}/>
+        {/*5. options={{title: "Popis Poslovnica"}} --> DODALI SMO SVE NASLOVE, DA NAM OKEJ IZGLEDAJU*/}
+        <Stack.Screen name="PopisPoslovnica" component={PopisPoslovnicaScreen} options={{title: "Popis Poslovnica"}}/>
+        <Stack.Screen name="DetaljiPoslovnice" component={DetaljiPoslovniceScreen} options={{title: "Detalji Poslovnice"}}/>
+        <Stack.Screen name="UrediPoslovnicu" component={UrediPoslovnicuScreen} options={{title: "Uredi Poslovnicu"}}/>
+        <Stack.Screen name="PregledSkladista" component={PregledSkladistaScreen} options={{title: "Pregled Skladišta"}}/>
+        <Stack.Screen name="ProdajArtikal" component={ProdajArtikalScreen} options={{title: "Prodaj Artikal"}}/>
+        <Stack.Screen name="PrebaciArtikal" component={PrebaciArtikalScreen} options={{title: "Prebaci Artikal"}}/>
+        <Stack.Screen name="ZatvoriPoslovnicu" component={ZatvoriPoslovnicuScreen} options={{title: "Zatvori Poslovnicu"}}/>
     </Stack.Navigator>
         )
 }

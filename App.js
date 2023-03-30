@@ -20,8 +20,8 @@ export default function App() {
       <NavigationContainer>
         {/*Želimo sakriti header drawer navigacije*/}
         <Drawer.Navigator screenOptions={{headerShown: false}}>
-          <Drawer.Screen name="DrawerPocetna" component={DrawerPocetnaScreen}/>
-          <Drawer.Screen name="DrawerPoslovnice" component={DrawerPoslovniceScreen}/>
+          <Drawer.Screen name="DrawerPocetna" component={DrawerPocetnaScreen} options={{title: "Početna"}}/>
+          <Drawer.Screen name="DrawerPoslovnice" component={DrawerPoslovniceScreen} options={{title: "Poslovnice"}}/>
         </Drawer.Navigator>
       </NavigationContainer>
     </Provider>

@@ -7,6 +7,9 @@ const INCREMENT = 1;
 
 //POSLOVNICE_TEST=lista poslovnica unutar reducer-a, zajedno sa njihiovim artiklima
 //POSLOVNICE_TEST.length=id prilikom kreiranja nove poslovnice
+
+//Mi sada imamo "state.poslovnica" iz store-a, koji ima svojstva poslovnice i next_id, kao props objekt
+//I sada im pristupamo sa "state.poslovnica.poslovnice" i "state.poslovnica.next_id"
 const initState = {
     poslovnice: POSLOVNICE_TEST,
     next_id: POSLOVNICE_TEST.length
