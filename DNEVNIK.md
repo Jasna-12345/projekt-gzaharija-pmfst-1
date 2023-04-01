@@ -56,3 +56,38 @@ poslovnice, odnosno kreirali smo NOVI OBJEKT koji sadrži postojeće poslovnice,
 niza postojećih poslovnica dodali novu, onu koju smo proslijedili u ovaj action.payload, te smo dodatno, nakon toga NEXT_ID 
 varijablu našeg state-a povećali za 1(koristeći increment). Sada vidimo kako nam se unutar Stack navigatora sa popisom poslovnica 
 pojavila i nova poslovnica, Test. 
+
+## 01.04.2023.
+Pocetak | Kraj
+------- | ----
+15:25   | 18:00
+### Omogućeno EDIT-iranje postojeće poslovnice unutar FormaPoslovnica i povratak na DetaljiPoslovnice
+Kada ponovno idemo na Početna-->Otvori poslovnicu, vidimo da su nam inputi ostali unutra, nije se RESET-irala forma, na početno 
+stanje, pa ćemo dodati funkciju resetForme, koja će samo sve ove vrijednosti: naziv, email i lokaciju koje smo postavili 
+promijeniti na ''. A pozivati ćemo ju nakon što smo odradili "otpremu" ili tzv. dispatch nove poslovnice. Dakle, mi smo ovdje 
+koristeći model Poslovnice, odnosno konstruktora klase Poslovnica, definiranog unutar modela, inicijaliziramo jednu novu
+poslovnicu, na vrijednosti koje su poslane kao parametri. Nakon toga, poslali smo te parametre, u obliku konstruktora klase na 
+STORE, odnosno naš GLOBAL STATE MANAGEMENT, nakon čega resetiramoFormu, kako bismo idući put ponovno mogli unijeti nove 
+parametre. A sada ćemo napraviti EDIT odnosno UPDATE poslovnice. Idemo na Poslovnicu 1--> Detalji Poslovnice, vidimo kako 
+tu nemamo trenutno ništa. Vidimo da imamo Detalji Poslovnice: 0, gdje nam 0 predstavlja početni ID poslovnice. Sada samo moramo 
+biti sigurni da smo to proslijedili ekranu Uredi poslovnicu, kako bi znali koju točno poslovnicu uređujemo. Idemo na 
+DetaljiPoslovniceScreen, da vidimo jesmo li kod navigacije na UrediPoslovnicu proslijedili ID poslovnice, vidimo da nismo, a u
+dokumentaciji vidimo da sve postale parametre koji nam trebaju, šaljemo kao destruktrurirano objekt, odnosno drugi parametar
+funkciji navigate, što znači da, kada kliknemao na botun "Uredi Poslovnicu", mi mu dodatno moramo proslijediti id_poslovnice, 
+kao parametar rute. Sada idemo na UrediPoslovnicuScreen, dodat' ćemo ID poslovnice, koji nam je sada ovdje dostupan, a 
+dohvatili smo ga preko route.params(jer smo ga iz DetaljiPoslovniceScreen poslali putem parametara funkcije navigate). Sada samo
+trebamo dohvatiti tu poslovnicu, kako bi ju mogli dodati u našu formu. Iskiristit' ćemo ponovno formu formaPoslovnica, kojoj
+kao parametar šaljemo poslovnicu koju moramo dohvatiti iz Redux store-a. A to radimo pomoću useSelector HOOK-a, odnosno state-a,
+gdje unutar SLICE poslovnice, odnosno unutar njegove liste poslovnica tražimo poslovnicu a našim id-em, koristeći find metodu. 
+Za svaku poslovnicu iz te liste, provjeravamo je li njen ID jednak našem ID-u poslovnice, jer u tom slučaju. pronašli smo 
+poslovnicu koja nam treba. Znači, došli smo na Uredi Poslovnicu, pronašli smo poslovnicu unutar STORE-a, prolsijedili smo ju 
+formi formaPoslovnica, i automatski su nam se sva polja ovdje popuni, a naš botun je sada Preimenovan u UREDI, jer
+smo to definirali unutar formaPoslovnica forme. 
+
+Ponovno smo u FormaPoslovnica, gdje dispatch radimo ovisno o akciji unutar poslovnicaAction. Zato ćemo dodati uvjet,
+if(jeDodavanje) gdje radimo provjeru, ako je riječ o dodavanju nove poslovnice, dispatch, "otpremu" radimo pomoću 
+akcije POSLOVNICA_ACTION.ADD_POSLOVNICA, a ako jeDodavanje===false, riječ je o update opciji, gdje imamo updatePoslovnica,
+odnosno dohvaćamo postojeću poslovnicu, ne treba nam next_id, te također radimo otpremu, dispatch, u ovom slučaju koristeći 
+akciju POSLOVNICA_ACTION.UPDATE_POSLOVNICA.Ako je riječ o dodavanju nove poslovnice u store, navigiramo se natrag na 
+TabPocetna, a ako je riječ o UPDATE opciji, radimo navigaciju na 1 stranicu natrag, odnosno na DetaljiPoslovnice, odnosno 
+na tu istu poslovnicu.
