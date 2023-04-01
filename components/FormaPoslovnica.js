@@ -32,8 +32,15 @@ const FormaPoslovnica = ({poslovnica}) => {
   };
 
   
-  //Kreiranu poslovnicu ćemo dodati u naš REDUX STORE, pomoću useDispatch()
+  //Kreiranu poslovnicu ćemo dodati u naš REDUX STORE, pomoću useDispatch() - OBAVEZNO IDE VAN FUNKCIJE submitForm
   const dispatch=useDispatch();
+
+  //Funkcija za resetiranje forme na početne vrijednosti
+  const resetForme = () => {
+    postaviNaziv('');
+    postaviEmail('');
+    postaviLokaciju('');
+  }
 
   const submitForm=()=>{
     //Kreiramo novu poslovnicu iz konstruktora
@@ -43,6 +50,9 @@ const FormaPoslovnica = ({poslovnica}) => {
     //TIP će nam biti POSLOVNICA_ACTION.ADD_POSLOVNICA(ADD_POSLOVNICA: "poslovnica/add"--> ovdje smo to vidjeli),
     //a podaci će nam biti upravo ova poslovnica, koju smo već kreirali
     dispatch(poslovnicaAction(POSLOVNICA_ACTION.ADD_POSLOVNICA,poslovnica))
+
+    //čistimo polja forme za iduću poslovnicu
+    resetForme()
 
     //Kada smo dodali novu poslovnicu, želimo se vratiti na DRAWER Početna, odnosno na TabPočetna
     navigation.navigate('TabPocetna')//navodimo NAME svojstvo rute
@@ -74,7 +84,7 @@ const styles = StyleSheet.create({
       borderColor: '#ccc',
       borderWidth: 1,
       padding: 10,
-      color: 'red', // ovdje postavite željenu boju slova
+      color: 'grey', // ovdje postavite željenu boju slova
       backgroundColor: '#fff',
       borderRadius: 5,
       borderWidth: 1,

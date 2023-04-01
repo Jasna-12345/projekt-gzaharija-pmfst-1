@@ -5,8 +5,8 @@ const DetaljiPoslovniceScreen=({route,navigation})=>{
     const {id_poslovnice}=route.params;
 
     return(<View>
-        <Text>Detalji poslovnice {id_poslovnice}</Text>
-        <Button onPress={()=>navigation.navigate('UrediPoslovnicu')} title="Uredi poslovnicu"></Button>
+        <Text>Detalji poslovnice: {id_poslovnice}</Text>
+        <Button onPress={()=>navigation.navigate('UrediPoslovnicu',{id_poslovnice})} title="Uredi poslovnicu"></Button>
     </View>)
 }
 
