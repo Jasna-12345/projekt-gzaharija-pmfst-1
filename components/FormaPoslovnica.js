@@ -43,19 +43,37 @@ const FormaPoslovnica = ({poslovnica}) => {
   }
 
   const submitForm=()=>{
-    //Kreiramo novu poslovnicu iz konstruktora
-    const poslovnica = new Poslovnica(next_id,naziv,email,lokacija);
+    //Ako jeDodavanje===true, dodajemo poslovnicu, akcija je ADD_POSLOVNICA
+    if(jeDodavanje){
+        //Kreiramo novu poslovnicu iz konstruktora
+        const novaPoslovnica = new Poslovnica(next_id,naziv,email,lokacija);
 
-    //dispatch funkciji šaljemo poslovnicaAction koji prima TIP i PODATKE(provjerimo u STORES-poslovnicaAction)
-    //TIP će nam biti POSLOVNICA_ACTION.ADD_POSLOVNICA(ADD_POSLOVNICA: "poslovnica/add"--> ovdje smo to vidjeli),
-    //a podaci će nam biti upravo ova poslovnica, koju smo već kreirali
-    dispatch(poslovnicaAction(POSLOVNICA_ACTION.ADD_POSLOVNICA,poslovnica))
+        
+        //dispatch funkciji šaljemo poslovnicaAction koji prima TIP i PODATKE(provjerimo u STORES-poslovnicaAction)
+        //TIP će nam biti POSLOVNICA_ACTION.ADD_POSLOVNICA(ADD_POSLOVNICA: "poslovnica/add"--> ovdje smo to vidjeli),
+        //a podaci će nam biti upravo ova poslovnica, koju smo već kreirali
+        dispatch(poslovnicaAction(POSLOVNICA_ACTION.ADD_POSLOVNICA,novaPoslovnica))
 
+        //Kada smo dodali novu poslovnicu, želimo se vratiti na DRAWER Početna, odnosno na TabPočetna
+        navigation.navigate('TabPocetna')//navodimo NAME svojstvo rute
+    }else{
+        //a ako uređujemo, jeDodavanje===false, akcija je UPDATE_POSLOVNICA
+
+        //Kao akcju dohvaćamo ID postojeće poslovnice
+        const updatePoslovnica = new Poslovnica(poslovnica.id,naziv,email,lokacija);
+
+        
+        //dispatch funkciji šaljemo poslovnicaAction koji prima TIP i PODATKE(provjerimo u STORES-poslovnicaAction)
+        //TIP će nam biti POSLOVNICA_ACTION.ADD_POSLOVNICA(ADD_POSLOVNICA: "poslovnica/add"--> ovdje smo to vidjeli),
+        //a podaci će nam biti upravo ova poslovnica, koju smo već kreirali
+        dispatch(poslovnicaAction(POSLOVNICA_ACTION.UPDATE_POSLOVNICA,updatePoslovnica))
+
+        //Kada smo dodali novu poslovnicu, želimo se vratiti UrediPoslovnicuScreen, a on nam je samo za 1 screen prije ovog
+        navigation.goBack()//znamo da se  vraćamo za 1 screen natrag
+    }
+    
     //čistimo polja forme za iduću poslovnicu
     resetForme()
-
-    //Kada smo dodali novu poslovnicu, želimo se vratiti na DRAWER Početna, odnosno na TabPočetna
-    navigation.navigate('TabPocetna')//navodimo NAME svojstvo rute
 
   }
 
