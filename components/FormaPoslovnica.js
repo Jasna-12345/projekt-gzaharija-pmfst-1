@@ -9,6 +9,9 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import Poslovnica from '../models/Poslovnica';
 import { poslovnicaAction } from '../stores/actions/poslovnicaAction';
+import TekstLabel from './TekstLabel';
+import { BOJA } from '../konstante';
+import BotunTekst from './BotunTekst';
 
 //Ako se kao parametar pošalje poslovnica, mi tu poslovnicu uređujemo, a ako je nema, mi dodajemo novu 
 //poslovnicu u naš STORE
@@ -79,17 +82,17 @@ const FormaPoslovnica = ({poslovnica}) => {
 
   return (
     <View>
-        <Text>Naziv poslovnice: </Text>
+        <TekstLabel>Naziv poslovnice: </TekstLabel>
         {/*Inače bi i ovdje kao onChangeText imali postaviNaziv, samo zbog provjere koristim provjeriPostavljanjeNaziva*/}
         <TextInput placeholder="Naziv poslovnice" onChangeText={provjeriPostavljanjeNaziva} value={naziv} style={styles.textInput}/>
 
-        <Text>Email poslovnice: </Text>
+        <TekstLabel>Email poslovnice: </TekstLabel>
         <TextInput placeholder="Email poslovnice" onChangeText={postaviEmail} value={email} style={styles.textInput}/>
 
-        <Text>Lokacija poslovnice: </Text>
+        <TekstLabel>Lokacija poslovnice: </TekstLabel>
         <TextInput placeholder="Lokacija poslovnice" onChangeText={postaviLokaciju} value={lokacija} style={styles.textInput}/>
     
-        <Button onPress={submitForm} title={jeDodavanje ? "Dodaj" : "Uredi"}/>
+        <BotunTekst onPress={submitForm} >{jeDodavanje ? "Dodaj" : "Uredi"}</BotunTekst>
     
     </View>
   )
@@ -111,6 +114,15 @@ const styles = StyleSheet.create({
       marginBottom: 10,
       fontWeight: 'bold',
       fontFamily: 'Times New Roman',
+    },
+    input:{
+        marginTop:5,
+        marginBottom:10,
+        padding:10,
+        borderColor:BOJA.UNOS_POZADINA,
+        color:BOJA.UNOS_TEKST,
+        borderRadius:10,
+        borderWidth:1,
     },
   });
 

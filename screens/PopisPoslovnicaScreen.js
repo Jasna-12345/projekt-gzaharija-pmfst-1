@@ -1,9 +1,10 @@
 import {View,Text,Button} from "react-native";
 import ListaPoslovnica from "../components/ListaPoslovnica";
+import Screen from "../components/Screen";
 
 
 const PopisPoslovnicaScreen=({route,navigation})=>{
-    return(<View>
+    return(<Screen>
         {/*<Text>Popis poslovnica</Text> ----> DO REDUX-a*/}
         <ListaPoslovnica/>
         {/*<Button onPress={()=>navigation.navigate('DetaljiPoslovnice')} title="Detalji poslovnice"></Button>
@@ -11,7 +12,7 @@ const PopisPoslovnicaScreen=({route,navigation})=>{
         <Button onPress={()=>navigation.navigate('ZatvoriPoslovnicu')} title="Zatvori poslovnicu"></Button> --> ukolnjeno nakon 
         dodavanja botuna za svaku poslovnicu unutar komponente Poslovnica, samo smo ove botune premjestili(4.)*/}
 
-    </View>)
+    </Screen>)
 }
 
 export default PopisPoslovnicaScreen;

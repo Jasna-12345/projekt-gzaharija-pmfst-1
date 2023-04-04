@@ -2,6 +2,9 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import { FlatList,Text,View, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Okvir from './Okvir';
+import BotunTekst from './BotunTekst';
+import TekstNaslov from './TekstNaslov';
 
 //Za svaki item u listi se poziva ova komponenta 
 //props objekt={id, naziv, email, lokacija, artikli, zarada}
@@ -10,14 +13,28 @@ const Poslovnica=({poslovnica,navigation})=>{
     {/*//Ne treba nam ako smo destrukturirali props objekt, nakon implementacije botuna kao dijela svake poslovnice 
     //const poslovnica=props.item;*/}
 
-    return (<View>
-        <Text style={{fontSize:24}}>{poslovnica.naziv}</Text>
+    return (<Okvir>
+        <TekstNaslov>{poslovnica.naziv}</TekstNaslov>
         {/*{id_poslovnice: poslovnica.id} --> sada konkretno znamo za koju poslovnicu mi želimo vidjeti detalje(1.button), pregledati skladište
         (2.button) ili eventualno želimo zatvoriti poslovnicu(3.button). */}
-        <Button onPress={()=>navigation.navigate('DetaljiPoslovnice', {id_poslovnice: poslovnica.id})} title="Detalji poslovnice"></Button>
-        <Button onPress={()=>navigation.navigate('PregledSkladista', {id_poslovnice: poslovnica.id})} title="Pregled skladišta"></Button>
-        <Button onPress={()=>navigation.navigate('ZatvoriPoslovnicu', {id_poslovnice: poslovnica.id})} title="Zatvori poslovnicu"></Button>
-    </View>)
+        <BotunTekst
+        //style={{ height: 50, width: 80, borderWidth: 4, borderColor: 'red' }}
+        onPress={()=>navigation.navigate('DetaljiPoslovnice', {id_poslovnice: poslovnica.id})} 
+        >Detalji poslovnice</BotunTekst>
+
+        {/*<View style={{ margin: 5 }}></View>*/}
+
+        <BotunTekst
+        onPress={()=>navigation.navigate('PregledSkladista', {id_poslovnice: poslovnica.id})} 
+         >Pregled skladišta</BotunTekst>
+        
+        {/*<View style={{ margin: 5 }}></View>*/}
+        
+        <BotunTekst
+        onPress={()=>navigation.navigate('ZatvoriPoslovnicu', {id_poslovnice: poslovnica.id})} 
+        >Zatvori poslovnicu</BotunTekst>
+
+    </Okvir>)
 }
 
 const ListaPoslovnica = () => {

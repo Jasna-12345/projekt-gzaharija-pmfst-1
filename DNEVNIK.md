@@ -91,3 +91,34 @@ odnosno dohvaćamo postojeću poslovnicu, ne treba nam next_id, te također radi
 akciju POSLOVNICA_ACTION.UPDATE_POSLOVNICA.Ako je riječ o dodavanju nove poslovnice u store, navigiramo se natrag na 
 TabPocetna, a ako je riječ o UPDATE opciji, radimo navigaciju na 1 stranicu natrag, odnosno na DetaljiPoslovnice, odnosno 
 na tu istu poslovnicu.
+
+## 04.04.2023.
+Pocetak | Kraj
+------- | ----
+17:55   | 20:18
+### Početno oblikovanje prethodno kreiranog dijela aplikacije - STYLING
+Dodali smo file konstante.js, u kojem definiramo boje koje ćemo koristiti za komponente u ekranima aplikacije. Zatim, u 
+folder components dodajemo komponentu Screen.js, koja će samo okružiti(wrapp-ati) cijeli ovaj naš navigation screen sa View 
+komponentom i nekim style-om(flex:1->biti će rastegnuta preko cijelog ekrana, imati će boju pozadine kao i sve ostale komponente, 
+imati će padding-margine sa svih strana). Kao props joj šaljemo children svojstvo, odnosno sve unutar Screen komponente 
+će biti prikazano ovdje. To koristimo kada idemo na primjerice, PopisPoslovnica ekran, gdje smo do sada imali običnu View 
+komponentu, koju ćemo sada zamijenti Screen komponentom, što znači da sada kada prikazujemo sve poslovnice, imamo finu pozadinu 
+boje antiquewhite, umjesto obične bijele pozadine, budući da smo to i definirali u Screen komponenti, a primjećujemo i padding. 
+Nama je ovdje ListaPoslovnica onaj children, odnosno prop od screen komponente. Zatim ćemo dodati komponentu Okvir.js, koja
+će nam služiti da fino oblikujemo našu listu poslovnica, odnosno radimo svijetloplavi okvir, komponentu jako sličnu onoj Screen,
+prima children i ima neki View element koji okružuje wrap-a taj children, i samo imamo malo pripaziti na stil, dodati ćemo
+borderRadius, imamo padding, marginu, backgroundColor... A ovu komponentu okvir ćemo sada koristiti u ListiPoslovnica, 
+a dodati ćemo i komponentu TekstNaslov, kako bismo fino oblikovali naslov svake poslovnice, odnosno njen naziv. 
+Komponenta TekstNaslov je dosta slična Screen i Okvir, samo ona sada umjesto View ima Text react redux componentu, jer prima 
+samo tekst i ima nekakav stil, da nam to malo bolje izgleda. Zatim ćemo dodati još jednu komponentu, BotunTekst, gdje koristimo 
+TouchableOpacity komponentu. Sada, unutar ListePoslovnica, kada koristimo BotunTekst umjesto Button, nemamo više title property
+gdje smo definirali što želimo da nam bude vidljivo na pozadini botuna, ali sada nam je to malo drugačije, taj tekst nam mora 
+biti children od BotunTekst komponente. 
+Zatim sam dodala još jednu komponentu TekstLabel, gdje također imam tekst oblikovan stilom, kao i do sada, i unutar imam
+render od children, a koristim ju unutar FormaPoslovnica, gdje umjesto običnog teksta koristim TekstLabel komponentu. 
+Za TekstInput, i dalje koristimo istu komponentu, samo sam dodala oblikovanje u obliku stilova koje smo definirali na dnu 
+forme. Na dnu forme isto tako nemamo običan Button, nego BotunTekst komponentu, da nam i taj botun bude oblikovan kao i ostali. 
+Samo ovdje opet umjesto title property-a imamo children, dakle, umjesto title={jeDodavanje ? "Dodaj" : "Uredi", koristimo
+<BotunTekst onPress={submitForm} >{jeDodavanje ? "Dodaj" : "Uredi"}</BotunTekst>. Zatim smo promjene dodali ostalim ekranima,
+najprije DetaljiPoslovnice, po uzoru na OtvoriPoslovnicu, PopisPoslovnica i UrediPoslovnicuScreen. Također, sam 
+stilizirala i početnu stranicu, PocetnaScreen, gdje kao i prethodno, umjesto View koristimo Screen komponentu. 
