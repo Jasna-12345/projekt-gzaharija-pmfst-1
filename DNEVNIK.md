@@ -215,3 +215,9 @@ poslovnice, da unutar funkcije FILTER ide provjera je li nam poslovnica.id!=acti
 nam je payload ID te poslovnice. Zatim samo navigiramo na prethodni screen.Zatim kreiramo funkciju ponisti, koja nam samo sluzi
 ukoliko korisnik klikne NE, za povtarak na prethodni screen. Dakle, idemo na Poslovnice, odaberemo npr. 1.poslovnicu-Zatvori
 poslovnicu, DA, te povratkom na Poslovnice, naša poslovnica više ne postoji, što je u redu.  
+
+## 06.04.2023.
+Pocetak | Kraj
+------- | ----
+11:15   | xx:xx
+### Opis aktivnosti
