@@ -242,3 +242,9 @@ Ne smijemo prilikom MAP-iranja zabpraviti key, a to nam u ovom slučaju može bi
 se to polje nalazi, počevši od 0. Definirala sam stilove za naslov i vrijednost, čisto da nam malo bolje izgleda pocetni
 ekran. 
  
+
+## 06.04.2023.
+Pocetak | Kraj
+------- | ----
+14:45   | XX:XX
+### Kratki opis promjena 
