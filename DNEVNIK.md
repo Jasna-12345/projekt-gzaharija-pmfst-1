@@ -262,5 +262,18 @@ izgleda dosta dobro.
 ## 06.04.2023.
 Pocetak | Kraj
 ------- | ----
-16:25   | XX:XX
-### Kratki opis promjena
+16:25   | 20:00
+### Učitani artikli poslovnice unutar skladišta (Poslovnice -> Poslovnica1 - Pregled skladišta) uz prikaz poslovnice
+Mi želimo klikom na "PREGLED SKLADISTA" dobiti informacije koje su nam dostupne unutar aplikacije, a vezane su za prikaz polja
+pojedinog artikla, pa ćemo i ovdje, ispod naslova, TekstNaslov komponente, unutar komponente ListaArtikala.js iskoristiti 
+komponentu PrikazPolja, te kao polja imao array unutar kojeg navodimo elemente kao parove {ime:'',vrijednost:''}, dakle, 
+prikazujemo nabavnu i prodajnu cijenu artikla te količinu. Tu primjećujem kako bi bilo dobro i ispisati iz koje poslovnice je
+artikal, pa ćemo to odmah dodati. Kako znamo da će nam to trebati i kasnije, više nećemo proslijeđivati samo artikle i
+ id_poslovnice nego ćemo tu napraviti neku grupu, dakle, svaki proizvod će imati artikal i poslovnicu. Najprije provjaravam
+gdje mi se ListaArtikala kao komponenta prikazuje, u PregledSkladistaScreen komponenti, gdje imamo artikle kao listu
+artikala. To ćemo sada malo promijeniti, jer kasnije, kada bude pretrazivali artikle, necemo imati samo 1 poslovnicu, 
+nego ce nam tu biti sve poslovnice i svi artikli. Zato, to cemo malo modificirati, u PregledSkladistaScreen dodamo 
+const poslovnica, i const artikli. Onda, varijabla proizvodi nam vraca novi niz objekata, koji se sastoje od poslovnice 
+i artikla, za svaki artikal. Sada trebamo malo modificirati i ListuArtikala, jer nam sada prima proizvode, i ne prihvaća 
+više id_poslovnice, kao do sada. PrikazPolja nam je komponenta koja omogućuje prikaz svih polja koje želimo ispisati u obliku 
+ime, pa ispod vrijednost.

@@ -11,17 +11,30 @@ const PregledSkladištaScreen=({route,navigation})=>{
     const {id_poslovnice}=route.params;
 
     //Pronalazimo poslovnicu s tim ID-em, iz STORE-a, zato koristimo useSelectom HOOK, odnosno state objekt, tj. njegov slice poslovnica.
-    const artikli=useSelector(state=>state.poslovnica.poslovnice.find(x=>x.id===id_poslovnice).artikli);//LISTA ARTIKALA
+    //const artikli=useSelector(state=>state.poslovnica.poslovnice.find(x=>x.id===id_poslovnice).artikli);//LISTA ARTIKALA - 2.način
     //LISTA ARTIKALA POSLOVNICE id_poslovnica
     //Mi provjeravamo za svaku poslovnicu, jel' joj id odgovara našem dobivenom id-u, i ako JE, unutar const artikli mi imamo
     //LISTU ARTIKALA
+
+    const poslovnica=useSelector(state=>state.poslovnica.poslovnice.find(x=>x.id===id_poslovnice));//jedna POSLOVNICA
+    const artikli=poslovnica.artikli;
+
+    //Mapirali smo artikle tako da za svaki artikal imamo artikal i naziv poslovnice
+    const proizvodi=artikli.map(artikal=>{
+        return{
+            poslovnica, 
+            artikal
+        }
+    });
 
     return(<Screen>
         {/*<Text>Pregled skladišta</Text>* --> ovo smo imali do sada*/}
         {/*<BotunTekst onPress={()=>navigation.navigate('ProdajArtikal')}>Prodaj artikal</BotunTekst>
         <BotunTekst onPress={()=>navigation.navigate('PrebaciArtikal')}>Prebaci artikal</BotunTekst>*/}
 
-        < ListaArtikala artikli={artikli} id_poslovnice={id_poslovnice} navigation={navigation} />
+        {/*Početna->Poslovnice->Pregled skladišta jedne poslovnice - vidimo da su nam prikazani svi artikli te poslovnice 
+        koje smo definirali unutar */}
+        <ListaArtikala proizvodi={proizvodi} navigation={navigation} />
 
     </Screen>)
 }
