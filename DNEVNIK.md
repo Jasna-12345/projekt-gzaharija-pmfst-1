@@ -277,3 +277,9 @@ const poslovnica, i const artikli. Onda, varijabla proizvodi nam vraca novi niz 
 i artikla, za svaki artikal. Sada trebamo malo modificirati i ListuArtikala, jer nam sada prima proizvode, i ne prihvaća 
 više id_poslovnice, kao do sada. PrikazPolja nam je komponenta koja omogućuje prikaz svih polja koje želimo ispisati u obliku 
 ime, pa ispod vrijednost.
+
+## 06.04.2023.
+Pocetak | Kraj
+------- | ----
+20:40   | XX:XX
+### Kratki opis promjena
