@@ -219,5 +219,12 @@ poslovnicu, DA, te povratkom na Poslovnice, naša poslovnica više ne postoji, �
 ## 06.04.2023.
 Pocetak | Kraj
 ------- | ----
-11:15   | xx:xx
-### Opis aktivnosti
+11:15   | 13:00
+### Ispis statističkih podataka svih poslovnica make-up proizvoda(ukupan broj, zaradu, kolicinu artikala na stanju)
+Na ekranu koji nam prikazuje statističke podatke svih poslovnica, trebali smo prikazati broj poslovnica, ukupnu zaradu, te 
+ukupan broj artikala na skladištu. To implementiramo unutar PocetnaScreen ekrana. Broj poslovnica ćemo jednostavno dohvatiti
+preko state objekta iz liste poslovnica. Zaradu računamo na način da samo prođemo kroz listu poslovnica i zbrojimo zaradu
+svake poslovnice, koristila sam funckiju reduce, s tim da ne smijemo zaboraviti definirati POCETNO STANJE akumulatora. Količinu
+također računam pomoću funckije reduce, s tim da imamo ugniježđeni reduce, najprije moramo proci kroz sve poslovnice,
+zbrojiti kolicine, i onda sve te zbrojeve kolicina svake poslovnice zbrojiti u iducoj funkciji. Taj dio nam je sada u redu. 
+ 
