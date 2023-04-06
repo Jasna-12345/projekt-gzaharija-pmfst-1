@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Screen from "../components/Screen";
 import Okvir from "../components/Okvir";
 import TekstNaslov from "../components/TekstNaslov";
+import PrikazPolja from "../components/PrikazPolja";
 
 const PocetnaScreen=({route, navigation})=>{
     
@@ -35,9 +36,14 @@ const PocetnaScreen=({route, navigation})=>{
         <Okvir>
             <TekstNaslov>Statistički podaci svih poslovnica make-up proizvoda</TekstNaslov>
             {/*Želimo ispisati ukupan broj poslovnica*/}
-            <Text>Broj poslovnica: {brojPoslovnica}</Text>
+            <PrikazPolja polja={[
+                {ime: 'Broj poslovnica', vrijednost:brojPoslovnica},
+                {ime: 'Ukupna zarada', vrijednost: zarada},
+                {ime: 'Ukupno proizvoda na skladištu', vrijednost:kolicina},
+            ]}/>
+            {/*<Text>Broj poslovnica: {brojPoslovnica}</Text>
             <Text>Ukupna zarada: {zarada}</Text>
-            <Text>Ukupno proizvoda na skladištu: {kolicina}</Text>
+            <Text>Ukupno proizvoda na skladištu: {kolicina}</Text>*/}
         </Okvir>
     </Screen>)
 }

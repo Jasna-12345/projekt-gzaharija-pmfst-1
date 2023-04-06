@@ -227,4 +227,18 @@ preko state objekta iz liste poslovnica. Zaradu računamo na način da samo pro�
 svake poslovnice, koristila sam funckiju reduce, s tim da ne smijemo zaboraviti definirati POCETNO STANJE akumulatora. Količinu
 također računam pomoću funckije reduce, s tim da imamo ugniježđeni reduce, najprije moramo proci kroz sve poslovnice,
 zbrojiti kolicine, i onda sve te zbrojeve kolicina svake poslovnice zbrojiti u iducoj funkciji. Taj dio nam je sada u redu. 
+
+## 06.04.2023.
+Pocetak | Kraj
+------- | ----
+13:15   | 14:45
+### Implementacija komponente PrikazPolja, kako bismo bolje strukturirali podatke na ekranu PocetnaScreen
+Zatim sam dodala komponentu PrikazPolja, koja kao parametar prima polja, a ta polja sam definirala kao listu, array gdje
+kao polja imamo ime i vrijednost. Komponenta je dosta slična TekstLabel komponenti, pa sam ju kopirala, samo ćemo
+ju prilagoditi. Najprije, naša komponenta sada ne prima children, nego polja. Returnamo jedan View, gdje ćemo iskoristiti 
+Text komponentu. Budući sa znamo da su nam polja array, mapiramo ih na način da nam svako polje return-a 1 View element, 
+i tu imamo Text komponentu koja će nam prikazivati ime kao label, a iduća Text komponenta će nam prikazivati vrijednost.
+Ne smijemo prilikom MAP-iranja zabpraviti key, a to nam u ovom slučaju može biti index, poziciju unutar array-a, gdje nam 
+se to polje nalazi, počevši od 0. Definirala sam stilove za naslov i vrijednost, čisto da nam malo bolje izgleda pocetni
+ekran. 
  
