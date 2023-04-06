@@ -122,3 +122,74 @@ Samo ovdje opet umjesto title property-a imamo children, dakle, umjesto title={j
 <BotunTekst onPress={submitForm} >{jeDodavanje ? "Dodaj" : "Uredi"}</BotunTekst>. Zatim smo promjene dodali ostalim ekranima,
 najprije DetaljiPoslovnice, po uzoru na OtvoriPoslovnicu, PopisPoslovnica i UrediPoslovnicuScreen. Također, sam 
 stilizirala i početnu stranicu, PocetnaScreen, gdje kao i prethodno, umjesto View koristimo Screen komponentu. 
+
+## 05.04.2023.
+Pocetak | Kraj
+------- | ----
+16:45   | 18:50
+### Implementirana forma za narudžbu novog artikla, te je artikal otpremljen na STORE
+Kreirali smo Formu za naručivanje novog artikla, na način da smo najprije dodali novu komponentu pod nazivom FormaArtikal.js. 
+Forma nam je jako slična FormaPoslovnica komponenti. Zatim, nakon definiranja FormeArtikla, prebacili smo ju na Screen pod
+nazivom NaruciArtikalScreen.js gdje smo View najprije zamijenili Screen komponentom. Odlaskom na Početna->Naruči Artikal vidimo
+konačni izgled forme, po uzoru na Forma Poslovnica, i to nam je u redu. Klikom na Dodaj izvršiti će se submitForme, gdje 
+umjesto novaPoslovnica imamo noviArtikal, i dolje, umjesto updatePoslovnica imamo updateArtikal. Kako smo rekli da ne možemo
+update-ati artikal, jeDodavanje kao kontrolna varijabla nam ovdje uopće ne treba, jer nemamo update, samo imamo DODAVANJE. 
+HOOK useState će nam uvijek biti "", inicijalno, i za naziv, nabavnu, prodajnu cijenu i količinu. Reset forme nam ostaje kao i 
+kod FormaPoslovnica-e, samo kod SubmitForme više nam ne treba if-else, nemamo mogućnost EDIT-iranja, već uvijek imamo samo
+akciju ADD_ARTIKAL, i radimo DISPATCH na global state management, STORE, pomoću akcije ADD_ARTIKAL, te na kraju idemo na 
+TabPocetna. Unesemo 1 novi artikal tipa: Ruž za usne, 100,300,5. Te smo se vratili na TabPočetna.
+
+## 06.04.2023. 
+Pocetak | Kraj
+------- | ----
+07:15   | 08:55
+### Unutar Pocetna-Poslovnice-Pregled skladišta jedne poslovnice izlistana LISTA ARTIKALA"
+Zatim smo dodali same artikle, odlaskom na Poslovnice-Pregled skladišta. To smo implementirali unutar PregledSkladistScreen, 
+gdje smo najprije konfigurirali screen, slično kao i prethodne screen-ove. Dakle, umjesto View komponente sada imamo Screen.
+Zatim smo umjesto Button ubacili BotunTekst komponentu, tako da umjesto title koristimo children svojstvo. Zatim smo unutar
+skladišta dobili fino uređene botune Prodaj i Prebaci artikal koji nam trebaju za svaki artikal u pojedinoj poslovnici. 
+Najprije, da bi mogli doći do tih artikla, trebao nam je ID poslovnice. Primjetili smo kako mi do PregledSkladista dolazimo
+pomocu navigation.navigate iz popisa poslovnica, pa sam najprije pronašla gdje koristim botun Skladište. Kada sam vidjela
+da ga koristim unutar komponente ListaPoslovnica, gdje primjećujem kako mi prilikom navigiranja na 'PregledSkladista', tom 
+screen-u šaljemo kao root parametar id, jer smo naveli: <BotunTekst onPress={()=>navigation.navigate('PregledSkladista', 
+{id_poslovnice: poslovnica.id})} >Pregled skladišta</BotunTekst>. Zatim sam po uzoru na dohvat ID-a iz DetaljiPoslovniceScreen,
+ID dohvatila i ovdje(const id_poslovnice=route.params), unutar PregledSkladistaScreen. Zatim je unutar PregledSkladistaScreen
+trebalo "izvući" listu tih artikala, a to radimo pomoću redux-a, odnosno useSelector HOOK-a, gdje koristimo state, odnosno
+njego slice Poslovnica, definiran unutar store-a, točnije unutar combineReducers, funkcije Redux-a, koja nam omogućuje 
+kombiniranje više reducera u jedan root reducer, kako bismo pomoću createStore mogli kreirati naš GSM(global state management).
+Zato sam ovdje pomoću funkcije find pokušala pronaći id poslovnice koji odgovara id-u kojeg smo mi ovdje dobili iz 
+ListePoslovnica. Dakle, nama artikli unutar PregledSkladista ekranu predstavljaju listu artikala te poslovnice. Zatim sam 
+kreirala novi dokument, ListaArtikala, po uzoru na ListaPoslovnica, ali ovdje mi ne dohvaćamo artikle kao i tamo poslovnice,
+vec smo mi poslovnice dobili kao prop, i samo ćemo ih proslijediti u Listu Artikala, tako da su nama data artikli, 
+keyextractor nam je artikal = artikal.naziv,(jer nam artikal nema id). Tu radimo render svakog pojedinog artikla, komponente
+Artikal definirane iznad u file-u ListaArtikala.js, gdje nam je artikal taj item, samo sam još stilizirala komponentu Artikal, 
+po uzoru na Poslovnica komponentu. Okvir nam ostaje, želim zadržati oblikovanje unutar box-a kao i unutar poslovnica 
+komponente, a kao botune sam ovdje prebacila 2 botuna definirana unutar PregledSkladištaScreen komponente, Prodaj i 
+Prebaci artikal. Za akcije Prodaj artikal i Prebaci artikal, nama je trebao i podatak iz koje poslovnice je to došlo, te sam
+kao prop unutar Liste artikala dodala i polje id_poslovnice, kako bismo znali iz koje poslovnice je nama artikl stigao, do 
+sada to nismo mogli, te ćemo id_poslovnice proslijediti našoj komponenti artikal. Još sam i unutar komponente artikal napravila 
+malu izmjenu. Dakle, navigation funkciji, osim stranice na koju navigiramo, rute, kao argumente sam dodala i sam artikal i 
+id_poslovnice, za oba botuna, Prodaj i Prebaci artikal. Zatim sam samo unutar PregledSkladištaScreen komponente linkali ovu
+Listu artikala, te nakon pokretanja sada primjećujemo kako unutar PregledSkladista ekrana vidimo artikle poslovnice definirane
+unutar ArtikliData dokumenta, i za svaki od njih imamo mogućnost Prodaje i Prebacivanja artikla.
+
+## 06.04.2023.
+Pocetak | Kraj
+------- | ----
+09:00   | 09:46
+### Omogućeno dodavanje novog artikla u konkretnu poslovnicu pomoću PICKER komponente
+ Primjetila sam jedan propust, unutar forme Naruci Artikal, ja nisam definirala u koju poslovnicu ide konkretno taj moj artikal, 
+a to nam je ujedno i najzanimljiviji dio, pa sam to naknadno implementirala. Najprije sam dodala novi library 
+- @react-native-picker/picker, React Native komponentu iz liste komponenti, koja nam omogućuje univerzalno sučelje 
+za odabir stavki iz liste opcija. Zapravo, ona nam zamjenjuje zadanu picker komponentu u React Native-u, koja ima 
+ograničenja na iOS-u i Androidu. Unutar FormaArtikal, dispatch funkciji uz akciju ADD_ARTIKAL, mi proslijeđujemo ne
+samo noviArtikal, nego će nam artikal biti taj noviArtikal, te id_poslovnice, kojeg ćemo dobiti iz PICKER komponente. 
+Ovdje, kako bismo mogli pratiti ID poslovnice, unutar FormaArtikal komponente, dodala sam jedan useState hook, const [idPoslovnice, 
+postaviIdPoslovnice]=useState(''); ali, trebaju nam i poslovnice pa smo njih dohvatili preko useState hook-a, kao
+const poslovnice=useSelector(state=>state.poslovnica.poslovnice). Zatim smo kao id_poslovnice, iniocijalno staviti id 0-te 
+poslovnice, odnosno useState(poslovnice[0].id), te nakon resetiranja forme ga također vraćamo na 1. poslovnicu. Zatim,dolje 
+unutar Picker komponente trebali smo renderirati poslovice iz naše liste poslovnica, a to nam je najlakše postići pomoću map 
+funckije, gdje nam x prodstsvlja svaku poslovnicu, te renderiramo Picker.Item kojem šaljemo kao prop label, odnosno
+naziv naše poslovnice, i value, kao id naše poslovnice, te kao key imamo id poslovnice. Zatim, u reduceru, gdje imamo
+akciju POSLOVNICA_ACTION.ADD_ARTIKAL, gdje kod provjere ne gledamo je li nam x.id razlicit od action.payload.id, nego od
+action.payload.id_poslovnice, jer smo tako definirali prethodno.

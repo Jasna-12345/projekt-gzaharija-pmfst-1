@@ -22,7 +22,7 @@ const poslovnicaReducer = (state = initState, action) => {
             return { poslovnice: [...state.poslovnice, action.payload], next_id: state.next_id + INCREMENT}
         case POSLOVNICA_ACTION.ADD_ARTIKAL:
             const p = state.poslovnice.map(x=> { 
-                if (x.id != action.payload.id) {
+                if (x.id != action.payload.id_poslovnice) {
                     return x;
                 }
                  x.artikli = [...x.artikli, action.payload.artikal]
