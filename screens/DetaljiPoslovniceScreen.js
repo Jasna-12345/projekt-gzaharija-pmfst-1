@@ -5,6 +5,7 @@ import Okvir from "../components/Okvir";
 
 
 const DetaljiPoslovniceScreen=({route,navigation})=>{
+    //Dohvat ID-a iz screen-a iz kojeg navigiramo ovdje, te je id poslan na ovu lokaciju kao route parmetar funkcije navigate
     const {id_poslovnice}=route.params;
 
     return(<Screen>
