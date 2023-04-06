@@ -239,12 +239,22 @@ ju prilagoditi. Najprije, naša komponenta sada ne prima children, nego polja. R
 Text komponentu. Budući sa znamo da su nam polja array, mapiramo ih na način da nam svako polje return-a 1 View element, 
 i tu imamo Text komponentu koja će nam prikazivati ime kao label, a iduća Text komponenta će nam prikazivati vrijednost.
 Ne smijemo prilikom MAP-iranja zabpraviti key, a to nam u ovom slučaju može biti index, poziciju unutar array-a, gdje nam 
-se to polje nalazi, počevši od 0. Definirala sam stilove za naslov i vrijednost, čisto da nam malo bolje izgleda pocetni
+se to polje nalazi, počevši od 0(A znamo da nam MAP funckija vraća function(POLJE, INDEX, ARR), nama treba samo POLJE i INDEX,
+pa ARR ne koristimo). Definirala sam stilove za naslov i vrijednost, čisto da nam malo bolje izgleda pocetni
 ekran. 
  
 
 ## 06.04.2023.
 Pocetak | Kraj
 ------- | ----
-14:45   | XX:XX
-### Kratki opis promjena 
+14:45   | 15:55
+### Unutar ekrana Detalji poslovnice fino ispisani detalji pomoću komponente PrikazPolja
+Zatim sam pokušala urediti ekran DetaljiPoslovniceScreen, gdje odmah možemo iskoristiti komponentu PrikazPolja. U 
+DetaljiPoslovniceScreen ćemo najprije izvući poslovnicu, pomoću useSelector HOOK-a, koristeći find metodu, 
+const poslovnica=useSelector(state=>state.poslovnica.poslovnice.find(x=>x.id===id_poslovnice)), te unutar komponente Okvir 
+radimo render TekstNaslov komponente, unutar koje prikazujemo poslovnica.naziv. Za sada klikom na Detalji poslovnice
+imamo prikaz naziva poslovnice i botun Uredi poslovnicu. Nedostaje nam prikaz podataka o toj poslovnici iznad botuna, 
+te ćemo sada i to implementirati. Najprije sam pogledala u modelu poslovnice, koja polja imamo, kako bih iste ovdje mogla
+i prikazati. To su mi polja: NAZIV, EMAIL, LOKACIJA, ARTIKLI, ZARADA. Zato sam unutar komponente prikaz polja, kao parametar 
+koji prima, array polja, dodala ime i vrijednost za svako od navedenih polja. Sada nam kartica za prikaz detalja poslovnice 
+izgleda dosta dobro.  

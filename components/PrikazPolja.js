@@ -3,6 +3,7 @@ import { BOJA } from "../konstante";
 
 const PrikazPolja=({polja})=>{
     return(<View>
+        {/*Map funckija nam vraća function(POLJE, INDEX, ARR), nama treba samo POLJE i INDEX*/}
         {polja.map((polje, index)=>{
             return <View key={index}>
                 <Text style={styles.naslov}>{polje.ime}: </Text>
