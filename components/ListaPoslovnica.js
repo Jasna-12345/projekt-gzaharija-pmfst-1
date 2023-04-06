@@ -31,7 +31,7 @@ const Poslovnica=({poslovnica,navigation})=>{
         {/*<View style={{ margin: 5 }}></View>*/}
         
         <BotunTekst
-        onPress={()=>navigation.navigate('ZatvoriPoslovnicu', {id_poslovnice: poslovnica.id})} 
+        onPress={()=>navigation.navigate('ZatvoriPoslovnicu', {poslovnica: poslovnica})} 
         >Zatvori poslovnicu</BotunTekst>
 
     </Okvir>)

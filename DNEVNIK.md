@@ -177,7 +177,7 @@ unutar ArtikliData dokumenta, i za svaki od njih imamo mogućnost Prodaje i Preb
 Pocetak | Kraj
 ------- | ----
 09:00   | 09:46
-### Omogućeno dodavanje novog artikla u konkretnu poslovnicu pomoću PICKER komponente
+### Omogućeno DODAVANJE novog artikla u konkretnu poslovnicu pomoću PICKER komponente(FORMA NoviArtikal) te pregled artikla unutar skladište poslovnice
  Primjetila sam jedan propust, unutar forme Naruci Artikal, ja nisam definirala u koju poslovnicu ide konkretno taj moj artikal, 
 a to nam je ujedno i najzanimljiviji dio, pa sam to naknadno implementirala. Najprije sam dodala novi library 
 - @react-native-picker/picker, React Native komponentu iz liste komponenti, koja nam omogućuje univerzalno sučelje 
@@ -193,3 +193,25 @@ funckije, gdje nam x prodstsvlja svaku poslovnicu, te renderiramo Picker.Item ko
 naziv naše poslovnice, i value, kao id naše poslovnice, te kao key imamo id poslovnice. Zatim, u reduceru, gdje imamo
 akciju POSLOVNICA_ACTION.ADD_ARTIKAL, gdje kod provjere ne gledamo je li nam x.id razlicit od action.payload.id, nego od
 action.payload.id_poslovnice, jer smo tako definirali prethodno.
+
+## 06.04.2023.
+Pocetak | Kraj
+------- | ----
+10:00   | 11:15
+### Omogućeno ZATVARANJE postojeće poslovnice unutar ekrana ZatvoriPoslovnicuScreen
+Cilj je bio omogućiti funkciju zatvaranja poslovnice, dakle, kada kliknemo na Poslovnice-Zatvori poslovnicu, trebao bi nam 
+se prikazati nekakv confirmation screen s upitom želimo li zaista zatvoriti poslovnicu ili ne, te button-i, koji ukoliko
+smo kliknuli DA, omogućuju zatvaranje poslovnice te povratak na popis poslovnica, bez ove, ili ako smo kliknuli NE, imamo 
+samo povratak na popis poslovnica. Koristimo ZatvoriPoslovnicuScreen komponentu. Tu smo najprije View komponentu zamijenili
+komponentom Screen, te smo kao route parametar, proslijedili poslovnicu. Mi Zatvori Poslovnicu botun koristimo u Popis 
+Poslovnica ekranu, odnosno tu koristimo komponentu Lista poslovnica, gdje navigiramo na ekran Zatvori poslovnicu, klikom na 
+3. botun, te smo do sada ovdje prosljeđivali samo ID poslovnice, iako sam to promijenila, sada želim proslijediti cijelu 
+poslovnicu. Tu poslovnicu unutar ZatvoriPoslovnicu ekrana dobivam preko route.params.poslovnica. Text komponentu sam
+zamijenila onom TekstNaslov, te dodala 2 BotunTekst komponente, klikom na koje korisnik nastavlja ili odustaje. Klikom na 
+DA, korisnik govori kako želi zatvoriti poslovnicu. U tom slučaju koristimo funckiju DISPATCH, koju ćemo dobiti pomoću
+useDispatch HOOK-a, i mi ovjde želimo unutar funkcije dispatch kreirati akciju, TIP akcije nam je POSLOVNICA_ACTION.
+BANCRUPTCY_POSLOVNICA, te kao parametar proslijeđujemo samo ID poslovnice, odnosno poslovnica.id. Vidimo u reducer-u
+poslovnice, da unutar funkcije FILTER ide provjera je li nam poslovnica.id!=action.payload, što znači da se podrazumijeva da
+nam je payload ID te poslovnice. Zatim samo navigiramo na prethodni screen.Zatim kreiramo funkciju ponisti, koja nam samo sluzi
+ukoliko korisnik klikne NE, za povtarak na prethodni screen. Dakle, idemo na Poslovnice, odaberemo npr. 1.poslovnicu-Zatvori
+poslovnicu, DA, te povratkom na Poslovnice, naša poslovnica više ne postoji, što je u redu.  
