@@ -258,3 +258,9 @@ te ćemo sada i to implementirati. Najprije sam pogledala u modelu poslovnice, k
 i prikazati. To su mi polja: NAZIV, EMAIL, LOKACIJA, ARTIKLI, ZARADA. Zato sam unutar komponente prikaz polja, kao parametar 
 koji prima, array polja, dodala ime i vrijednost za svako od navedenih polja. Sada nam kartica za prikaz detalja poslovnice 
 izgleda dosta dobro.  
+
+## 06.04.2023.
+Pocetak | Kraj
+------- | ----
+16:25   | XX:XX
+### Kratki opis promjena
