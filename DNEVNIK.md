@@ -278,8 +278,37 @@ i artikla, za svaki artikal. Sada trebamo malo modificirati i ListuArtikala, jer
 više id_poslovnice, kao do sada. PrikazPolja nam je komponenta koja omogućuje prikaz svih polja koje želimo ispisati u obliku 
 ime, pa ispod vrijednost.
 
-## 06.04.2023.
+## 07.04.2023.
 Pocetak | Kraj
 ------- | ----
-20:40   | XX:XX
-### Kratki opis promjena
+07:00   | 09:50
+### Omogućena funkcionalnost PRODAJE ARTIKLA(UPDATE KOLICINE, UPDATE POSLOVNICE, DISPATCH NA STORE) i refresh stanja skladista. 
+Do sada sam imala 2 ekrana namijenjena prodaji artikla, ProdajaArtiklaScreen i ProdajArtikalScreen, jer inicijalno,
+kada sam definirala na koje ekrane idemo, mi PRODAJI ARTIKLA možemo pristupiti preko skladišta, botun Prodaj artikal, i 
+preko pretraživanja artikla, vidimo da mi tu imamo listu artikala gdje klikom na PRODAJ ARTIKAL, dolazimo na isti screen, 
+pa ćemo to malo modifirati, tako da imamo 1 ProdajArtikalScreen. Najprije ćemo prodaju omogućiti unutar Pregleda skladišta
+jedne poslovnice, gdje korisnik klikom na Prodaj artikal ide na PregledArtiklaScreen.js. Tu najprije View komponentu
+zamijenimo Screen komponentom, da nam pozadina ekrana bude ujednačena s ostatkom aplikacije. Zatim smo izvukli artikal i 
+poslovnicu iz route.params, a to znamo jer mi do PRODAJA ARTIKLA botuna dolazimo preko PregledSkladistaScreen-a, odnosno
+preko ListaArtikala komponente, gdje nam je i definiran ovaj botun: <BotunTekst onPress={()=>navigation.navigate('ProdajArtikal',
+{artikal, poslovnica})}>Prodaj artikal</BotunTekst>, te ovdje vidimo rutu, a to nam je 'ProdajArtikal', tj. ekran na kojem
+smo trenutno, a kao params smo poslali {artikal, poslovnica}. Zato artikal i poslovnicu možemo dohvatiti unutar 
+ProdajArtikalScreen. Ovdje možemo iskoristiti cijeli dio return-a ListeArtikala, samo ćemo ukolniti botune, jer nam oni ne 
+trebaju. Kada smo učitali sve podatke za artikal kojeg želimo prodati, vidimo da nam KOLICINA polje nije u redu, korisnik 
+bi trebao imati mogucnost odabira količine. Za to nam treba novi library: npx expo install @react-native-community/slider. 
+Sada ćemo samo dodati taj Slider unutar komponente ProdajArtikalScreen, s tim da nam treba jedan useState HOOK, kako bismo
+mogli pratiti vrijednost slider-a, ovisno što korisnik odabere. Zatim, mi da bi prodali artikal, moramo, smanjiti mu količinu, 
+i moramo izračunati koliko smo zaradili, i UPDATE-ati poslovnicu novim podacima. Novu zaradu poslovnice ćemo dobiti na način 
+da uzimamo trenutnu zaradu poslovnice i dodamo joj RAZLIKU PRODAJNE I NABAVNE CIJENE POMNOŽENU S KOLIČINOM PRODANIH ARTIKALA. 
+Nakon što smo definirali logiku za UPDATE liste artikala, unutar funkcije prodajArtikal, trebamo napraviti i UPDATE poslovnice.
+To ćemo implementirati u drugom dijelu funkcije. Novu_kolicinu i novu_poslovnicu moramo pomocu DISPATCH funckije poslati na STORE, 
+kako bi se izvrsila akcija UPDATE_POSLOVNICE, jer mi tu imamo Poslovnicu koju trebamo UPDATE-ati u globalnom store-u. Dakle,
+klikom na PRODAJ ARTIKAL, treba se updte-ati poslovnica i artikli, a mi se samo još moramo putem navigacije vratiti na prethodni 
+ekran, a to možemo putem navigation.goBack(). Odlaskom na Poslovnice->(POSL1.)Pregled skladišta->Kameni puder->Prodaj artikal, 
+povratkom na Ekran pregled skladista, vidimo da nam se kolicina smanjila za broj prodanih proizvoda, a povratkom na pocetnu,
+gdje imamo ukupni pregled skladišta, vidimo da smo zaradili 49.99999999. Kako nam cijena nebi tako ružno izgledala, unutar 
+PocetnaScreen ekrana, koristimo Math.round(zarada), prilikom ispisa, te nam je sada cijena 50. Testiramo još i prodaju svih 
+artikala. Odlaskom na Poslovnice-(P1)Pregled skladista->Prodaj artikal(Kameni puder)->odaberemo svih 200 proizvoda, povratkom
+na pregled skladišta primjećujemo kako proizvoda NEMA na skladištu, izbacimo ga (u kodu funkcija FILTER). A odlaskom na Pocetna
+ekran vidimo kako smo zaradili 2000, jer nam je rezlika prodajne i nabavne cijene 10, a prodali smo 200 proizvoda, te se 
+ukupan broj proizvoda na skladištu smanjio za tih 200 proizvoda, te ih sada imamo 5240. 

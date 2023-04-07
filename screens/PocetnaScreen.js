@@ -38,7 +38,7 @@ const PocetnaScreen=({route, navigation})=>{
             {/*Želimo ispisati ukupan broj poslovnica*/}
             <PrikazPolja polja={[
                 {ime: 'Broj poslovnica', vrijednost:brojPoslovnica},
-                {ime: 'Ukupna zarada', vrijednost: zarada},
+                {ime: 'Ukupna zarada', vrijednost: Math.round(zarada)},
                 {ime: 'Ukupno proizvoda na skladištu', vrijednost:kolicina},
             ]}/>
             {/*<Text>Broj poslovnica: {brojPoslovnica}</Text>
