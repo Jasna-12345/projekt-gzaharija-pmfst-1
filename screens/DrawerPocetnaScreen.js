@@ -21,7 +21,7 @@ const DrawerPocetnaScreen=()=>{
             <Tab.Screen name="TabOtvoriPoslovnicu" component={OtvoriPoslovnicuScreen} options={{...headerOpcije, title: "Otvori Poslovnicu"}} ></Tab.Screen>
             {/*Trebamo sakriti header od TAB navigacije, jer nam je taj screen stack navigator i još trebamo prikazati header od stack navigatora*/}
             {/*A to cemo implementirati u screen-u TabPretraziArtikle*/}
-            <Tab.Screen name="TabPrikaziArtikle" component={TabPretraziArtikle} options={{headerShown:false, title: "Prikaži Artikle"}} ></Tab.Screen>
+            <Tab.Screen name="TabPrikaziArtikle" component={TabPretraziArtikle} options={{headerShown:false, title:"Prikaži artikle"}} ></Tab.Screen>
         </Tab.Navigator>
 )
 }

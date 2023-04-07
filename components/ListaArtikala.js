@@ -46,7 +46,7 @@ const ListaArtikala = ({proizvodi}) => {
         data={proizvodi}
         //Prop keyExtractor je funkcija koja uzima jedan artikal i vraća njegov jedinstveni ključ. U ovom slučaju, 
         //jedinstveni ključ je naziv artikla (proizvod.artikal.naziv)
-        keyExtractor={proizvod => proizvod.artikal.naziv }//Koristi se id kao jedinstveni ključ za svaki element liste 
+        keyExtractor={proizvod => `${proizvod.poslovnica.id}-${proizvod.artikal.naziv}`}//proizvod.artikal.naziv }//Koristi se id kao jedinstveni ključ za svaki element liste 
         //Funkcija koja nam daje svaku poslovnicu i govori nam kako ćemo mi prikazati tu poslovnicu
         //renderItem={Poslovnica} //Za svaki item u listi će se pozvati ova komponenta, Poslovnica
 
