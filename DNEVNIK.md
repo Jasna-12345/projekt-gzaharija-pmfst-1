@@ -312,3 +312,9 @@ artikala. Odlaskom na Poslovnice-(P1)Pregled skladista->Prodaj artikal(Kameni pu
 na pregled skladišta primjećujemo kako proizvoda NEMA na skladištu, izbacimo ga (u kodu funkcija FILTER). A odlaskom na Pocetna
 ekran vidimo kako smo zaradili 2000, jer nam je rezlika prodajne i nabavne cijene 10, a prodali smo 200 proizvoda, te se 
 ukupan broj proizvoda na skladištu smanjio za tih 200 proizvoda, te ih sada imamo 5240. 
+
+## 07.04.2023.
+Pocetak | Kraj
+------- | ----
+10:10   | XX:XX
+### Kratki opis promjena 
