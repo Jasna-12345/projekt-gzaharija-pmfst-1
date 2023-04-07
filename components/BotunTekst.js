@@ -25,5 +25,6 @@ const stilovi=StyleSheet.create({
     tekst:{
         color:BOJA.BOTUN_TEKST,
         fontSize:20,
+        fontWeight: 'bold',
     },
 })

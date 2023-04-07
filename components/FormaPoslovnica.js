@@ -81,7 +81,7 @@ const FormaPoslovnica = ({poslovnica}) => {
   }
 
   return (
-    <View>
+    <View style={{margin:20}}>
         <TekstLabel>Naziv poslovnice: </TekstLabel>
         {/*Inače bi i ovdje kao onChangeText imali postaviNaziv, samo zbog provjere koristim provjeriPostavljanjeNaziva*/}
         <TextInput placeholder="Naziv poslovnice" onChangeText={provjeriPostavljanjeNaziva} value={naziv} style={styles.textInput}/>
@@ -100,7 +100,7 @@ const FormaPoslovnica = ({poslovnica}) => {
 
 const styles = StyleSheet.create({
     textInput: {
-      width: '80%',
+      width: '98%',
       height: 50,
       borderColor: '#ccc',
       borderWidth: 1,
@@ -111,13 +111,14 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderColor: '#ccc',
       fontSize: 16,
-      marginBottom: 10,
+      //margin:20,
       fontWeight: 'bold',
       fontFamily: 'Times New Roman',
     },
     input:{
-        marginTop:5,
-        marginBottom:10,
+        margin:20,
+        //marginTop:5,
+        //marginBottom:10,
         padding:10,
         borderColor:BOJA.UNOS_POZADINA,
         color:BOJA.UNOS_TEKST,

@@ -316,5 +316,41 @@ ukupan broj proizvoda na skladištu smanjio za tih 200 proizvoda, te ih sada ima
 ## 07.04.2023.
 Pocetak | Kraj
 ------- | ----
-10:10   | XX:XX
-### Kratki opis promjena 
+10:10   | 12:20
+### Unutar tabPrikaziArtikle, izlistani artikli svih poslovnica
+Kako smo prethodno implementirali Prodaju artikla, i imamo Pregled skladišta, to bi mogli iskoristiti za PretraziArtikle ekran, 
+gdje ćemo isto imati Prodaju artikala. Dakle, idemo na Pocetna-> tab Prikaži artikle-> tu sada imam stack screen gdje imamo
+mogućnost pretrage artikala te prodaju artikla, kao i na prethodn implementrianom ekranu. Najprije, mi bi ovjde trebali imati 
+LISTU ARTIKALA, a vidjeli smo da nam ona prima nekakav array proizvoda, a svaki array item nam ima poslovnicu i artikal u sebi
+(a to vidimo u PregledSkladistaScreen komponenti, jer od tu pozivamo Listu artikala).Kada smo učitali listu artikala u 
+PretraziArtikle ekranu, primjecujemo kako imamo "Kameni puder" u 2 poslovnice, i oni nam imaju isti kexEktractor unutar
+ListePoslovnica, što nikako nije dobro. Trebamo koristiti drugi KEY EXTRACTOR, a to ce nam biti: ID_POSLOVNICE-NAZIV ARTIKLA,
+jer nam je do sada tu bio isključivo NAZIV ARTIKLA, i normalno ako imam 2 ista naziva artikla u 2 razlicite poslovnice, 
+da nikako nije dobro, nemam jedinstveni KEY. Sada, odlaskom na Pocetna-tab PrikaziArtikle, imamo uredno prikazane artikle
+koje ćemo moći pretraživati. Samo to još nismo omogućili.
+
+## 07.04.2023.
+Pocetak | Kraj
+------- | ----
+14:10   | 16:27
+### Omogućena pretraga artikla unutar Pretrazi artikle ekrana, te otklonjena greška prilikom prodaje  
+Zatim ćemo na listu artikala, na vrh unutar PretraziArtikle ekrana, na vrh dodati SEARCH element. Kada smo dodali TextInput
+element, mi moramo omoguciti funkcionalnost pretrage, odnosno update-ati listu proizvoda koje ćemo prikazati nakon pretrage,
+i tu ćemo iskoristiti stanje trazilica, definirano putem useState hook-a, kako bismo mogli pratiti vrijednosti unosa. Ako ono 
+što je korisnik unio u TextInput element sadrzi barem jedno slovo iz trazilice, a to provjeravamo pomoću .includes funkcije, 
+mi samo te artikle ostavljamo, pushamo ih u acumulator, u ovom slucaju u LISTU, koja je inicijalno prazna. Zatim, imamo problem
+ukoliko unesemo "E", a prpoizvod sadrži u nazivu "e", nemamo prikazan nijedan artikal, te bi bilo dobro najprije sve pretvoriti
+u mala slova, pomoću toLowerCase funkcije, kako bi provjera bila efikasnija. Sada odlaskom na Pocetna->Prikazi artikle, mozemo
+pretraziti artikle, i to unoso "SET", imamo prikazan "Set kistova", za svaku od 8 poslovnica, te nam je taj dio sada u redu. 
+Sada imamo grešku, ("The action 'NAVIGATE' with payload {"name":"ProdajArtikal","params":{"artikal":{"naziv":"Set kistova",
+"nabavna_cijena":139.99,"prodajna_cijena":179.99,"kolicina":20},"poslovnica":...)was not handled by any navigator. 
+Do you have a screen named 'ProdajArtikal'? Kaže kako ne može navigirati na "ProdajArtikal", jer on NE postoji, u trenutnoj 
+navigaciji. Kako to znamo? Mi unutar App.js imamo 2 odvojene navigacije, u 1. Drawer-u smo imali DRAVWEPOSLOVNICESCREEN, 
+gdje smo naveli sve STACK SCREEN-ove, jedan od njih je bio onaj s name='PregledSkladista', gdje smo imali isto listu artikala,
+i kada kliknemo na PRODAJ ARTIKAL, mi idemo na PRODAJ ARTIKAL istog tog STACK-a, gdje je name="ProdajArtikal", a 
+component=ProdajArtikalScreen. To je nama trenutno nebitno, ali dobro je za usporedbu da vidimo gdje bi mogao biti BUG. 
+Dok, u potpuno drugom navigatoru, DRAWER POCETNA, mi imamo definirane tabove, 1 od njih je TabPretraziArtikle, na kojem 
+smo mi danas radili, a sam TabPretraziArtikle ima svoj STACK NAVIGATOR, od kojih drugi kaže kako idemo na 
+ProdajaArtiklaScreen. Kako bismo riješili problem, pokušat ćemo naziv ProdajaArtikla preimenovati u ProdajArtikal, 
+i pozvati komponentu ProdajArtikalScreen, u TabPretraziArtikle. Spremanjem promjena, na TabPretraziArtikal, imamo listu artikala, 
+pretrazimo set kistova, i PRODAJ ARTIKAL botun nam uredno funkcionira.

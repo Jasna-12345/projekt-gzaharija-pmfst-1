@@ -80,10 +80,10 @@ const ProdajArtikalScreen=({route, navigation})=>{
             {/*</Okvir>*/}
             <View style={styles.bottomContainer}>
                 <Text style={styles.sliderValue}>Količina: {kolicina}</Text>
-                <Text style={styles.sellButton}>Prodaj artikal</Text>
+                {/*<Text style={styles.sellButton}>Prodaj artikal</Text>*/}
             </View>   
 
-            <BotunTekst onPress={prodajArtikal}>Prodaj </BotunTekst>
+            <BotunTekst onPress={prodajArtikal} style={{fontWeight: 'bold'}}>Prodaj </BotunTekst>
             </Okvir>
     </Screen>)
 }
