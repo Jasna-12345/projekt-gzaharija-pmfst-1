@@ -35,7 +35,7 @@ const PrebaciArtikalScreen=({route,navigation})=>{
     
 
     const prebaciArtikal=()=>{
-        const [toPoslovnica, setToPoslovnica] = useState(null); 
+        //const [toPoslovnica, setToPoslovnica] = useState(null); 
         
          // KOLIKO ARTIKALA MI OSTAJE NA STANJU, U STORE-U?(UKUPNO NA STORE-u - količina odabrana na SLIDER-u)
          const from_kolicina = artikal.kolicina - kolicina;
