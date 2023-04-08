@@ -31,12 +31,6 @@ const poslovnicaReducer = (state = initState, action) => {
             return {...state, poslovnice : p}
         case POSLOVNICA_ACTION.UPDATE_POSLOVNICA:
             return {...state, poslovnice: state.poslovnice.map(x=> x.id == action.payload.id ? action.payload : x)}
-  
-        case POSLOVNICA_ACTION.TRANSFER_ARTIKAL:
-                return {...state, poslovnice: state.poslovnice.map(x=> {
-                    if (x.id == action.payload.first.id) return action.payload.first
-                    return  x.id == action.payload.second.id ? action.payload.second : x
-                })}
     
         case POSLOVNICA_ACTION.BANKRUPTCY_POSLOVNICA:
             return {...state, poslovnice: state.poslovnice.filter(x=> x.id != action.payload)}

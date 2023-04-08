@@ -382,3 +382,33 @@ da prnalazimo podlovnicu s id-em u kojoj smo trenutno. To nam je array poslovnic
 Poslovnice 1, poslovniceZaTransfer nam je array čiji objekti su poslovnice iz STORE-a, P2-P8. Kada postavljamo 1. put 
 idPoslovnice, trebamo dobro pripaziti da najprije provjerimo postoje li poslovniceZaTransfer. Ukoliko postoje, postavimo
 ID prve u nizu za idPoslovnice, u protivnom, idPoslovnice nam je ''. 
+
+## 08.04.2023.
+Pocetak | Kraj
+17:00   | 18:52
+### Omogućeno prebacivanje proizvoda iz jedne poslovnice u drugu pdlaskom na Pregled skladišta->Prebaci artikal 
+Sada trebamo implementirati prebaciArtikal funkciju. Ovdje koristim FROM-TO sintaksu, zbog jednostavnijeg razumijevanja. FROM
+mi označava od kuda se artikli prebcuju, dok TO označava gdje artikli idu, gdje se artikli prebacuju.Najprije, varijabla 
+from_količina nam označava koju količinu artikala prebacujemo, odnosno KOLIKO KOMADA OSTAJE NA STANJU,tj. od vrijednosti 
+artikala na stanju, sa STORE-a, oduzimamo količinu koju korisnik odabere na SLIDER-u. Zatim, moramo modificirati artikle 
+iz 1.POSLOVNICE(FROM POSLOVNICE), a kako to radimo, najprije provjerimo ima li uopće više tog artikla, ako ga nema, varijabla
+from_kolicina ima vrijendost 0, IZBACUJEMO ga iz liste artikala. A ako još imamo par komada tog artikla na stanju, pronađemo
+taj artikal u listi artikala poslovnice iz koje prebacujemo, i vratimo NOVI ARTIKAL koji ima sve vrijednosti atributa jednake 
+onima od prije(naziv, prodajna i nabavna cijena), samo mu AŽURIRAMO vrijednost količine. Kada smo ažurirali vrijednosti 
+artikala(samo ovog čijih par komada(stanje kolicina) želimo prebaciti), trebamo ažurirato poslovnicu, na isti način, pomoću
+konstruktora definiranog u modelima poslovnice, tako da nam svi atributi ostaju isti, osim LISTE ARTIKALA, prethodno ažurirane.
+Zatim trebamo kolicinu nekog artikla koju je korisnik odabrao DODATI iatom artiklu POSLOVNICE U KOJU PROEBACUJEMO ARTIKAL,
+u mom slučaju označene kao to_poslovnica. Najprije ćemo pronać tu poslovnicu, koristeći FIND metodu, preko ID-a. Ako u listi
+artikala ODREDIŠNE poslovnice imamo artikal čijih par komada prebacujemo, osvježiti ćemo artikle tako da sve one čiji naziv ne 
+odgovara mom artikllu return-amo nepromijenjene, a ako smo pronašli artikal s istim nazivom čijih par komada mi prebacujemo, 
+raturn-amo novi artikal koji će nam imati istu vrijednost atributa kao i prehtodno(naziv, prodajna i nabavna cijena), samo 
+njegovoj količini u toj poslovnici, mi dodajemo količinu koju je korisnik odabrao putem slider-a. Ako kojim slučajem artikal 
+u odredišnoj poslovnici ne postoji, destrukturiramo niz dosadašnjih artikala, na način da ima na kraj dodamo novi artikal sa
+svim atributima sa STORE-a, s tim da mu je vrijednost količine ona koju je korisnik odabrao putem slider-a. Sada samo još moramo
+pomoću DISPATCH funkcije obaviti UPDATE poslovnice, tako da na STORE šaljemo poslovnicu iz koje prebacujemo artikle, sa 
+ažuriranom listom artikala, a moramo napraviti i UPDATE pomoću dispatch funkcije, tako da pošaljemo na STORE poslovnicu
+kojoj smo poslali određenu količinu nekog artikla, upravo s tom ažuriranom LISTOM ARTIKALA. Testiramo odlaskom na Poslovnice->
+Pregled skladišta->Odabremo neki artikal, dodirom gumba Prebaci, imamo Okvir komponentu, unutar koje imamo detalje o artiklu,
+atribute poput naziva, prodajne i nabavne cijene te kolicine, i imamo mogucnost prebacivanja određene količine odabirom pute 
+SLIDER komponente. Ja sam prebacila 1 Kameni puder iz P1 u P2, i vidimo kako nam to uredno radi. U P2, pregledom skladišta 
+primjećujemo kako imamo 201 Kameni puder, a inicijalno smo ih imal 200, te nam je ovaj dio za sada u redu.
