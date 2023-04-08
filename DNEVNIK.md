@@ -354,3 +354,8 @@ smo mi danas radili, a sam TabPretraziArtikle ima svoj STACK NAVIGATOR, od kojih
 ProdajaArtiklaScreen. Kako bismo riješili problem, pokušat ćemo naziv ProdajaArtikla preimenovati u ProdajArtikal, 
 i pozvati komponentu ProdajArtikalScreen, u TabPretraziArtikle. Spremanjem promjena, na TabPretraziArtikal, imamo listu artikala, 
 pretrazimo set kistova, i PRODAJ ARTIKAL botun nam uredno funkcionira.
+
+## 08.04.2023.
+Pocetak | Kraj
+09:40   | XX:XX
+### Kratki opis promjena
