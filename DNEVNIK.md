@@ -357,5 +357,28 @@ pretrazimo set kistova, i PRODAJ ARTIKAL botun nam uredno funkcionira.
 
 ## 08.04.2023.
 Pocetak | Kraj
-09:40   | XX:XX
-### Kratki opis promjena
+09:40   | 15:55
+### Početna verzija ekrana PrebaciArtikalScreen, (Poslovnice->Pregled skladista jedne->Prebaci artikal), bez funkcionalnosti 
+Preostalo nam je još implementirati funkcionalnosti prebacivanja artikla. Do gumba PREBACI ARTIKAL, mi trenutno možemo doći 
+na 2 mjesta, 1. najprije preko DRAVERPOCETNA, tab Prikazi artikle, gdje nakon pretrage željenog artikla imamo mogućnost klika
+na botun Prebaci artikal, te 2. klikom na Poslovnice->Pregled skladista jedne poslvnice, za svaki od artikala također imamo
+mogučnost odabira akcije PREBACI ARTIKAL. Možemo najprije vidjeti iz PREGLED SKLADISTA, kada kliknemo na botun PREBACI
+ARTIKAL, za neki od proizvoda, te se nalazimo na PrebaciArtikalScreen. Najprije sam View komponentu, definiranu prethodno, 
+zamijenila Screen komponentom. Idemo najprije pogledati kako dolazimo do PretraziArtikalScreen. Vidimo da ovdje dolazimo 
+preko LISTE ARTIKALA, gdje mi klikom na Prebaci artikal botun navigiramo na PrebaciArtikalScreen, a parametri koje dobivamo
+du {artikal, poslovnica}, što znači da ovdje artikal i poslovnica dobivamo iz route.params. Ovdje će nam trebati stanje 
+kojim pratimo vrijednost količine, te ćemo koristiti dispatch funkciju, znači ponovno koristimo useDispatch() HOOK, a
+možemo ikoristiti i ostatak ProdajArtikalScreen-a, odnosno dijela kojeg vraćamo, prikazujemo korisniku, dakle, sve ono unutar
+Okvir komponente možemo iskoristiti i ovdje, samo ćemo malo modificirati. Ne smijemo zaboraviti import svih komponenti koje
+koristimo. Osim toga, ovdje ću definirati funkciju prebaciArtikal, unutar koje ćemo definirati funkcionalnost koju je 
+potrebno odraditi kao onPress svojstvo botuna, odnosno ukoliko korisnik odabere botun PREBACI. Vidimo da nam treba još 
+jedan TekstInput element, gdje korisnik bira u koju poslovnicu želi prebaciti artikal. To sam prije par dana radila unutar
+NaruciArtikal ekran-a, odnosno FormaArtikal komponente, koristeći Picker komponentu bilioteke react-native, što ovdje možemo 
+iskoristiti. Treba nam još jedno stanje kako bismo pratili id poslovnice, a to ponovno implementiramo koristeći useState HOOK. 
+I dalje nemamo sve poslovnice, koje ćemo prikazati unutar Picker komponente, pa ćemo to sada dodati. A kako svaki put dohvaćamo 
+poslovnice? Koristeći STORE, global state management. U redu, kada smo dobili sve poslovnice, vidimo kako nama trebaju sve 
+poslovnice osim one u kojoj se trenutno nalazimo, što ćemo odraditi koristeći FILTER funkciju, a filtriramo po id-u, na način
+da prnalazimo podlovnicu s id-em u kojoj smo trenutno. To nam je array poslovniceZaTransfer. Ukoliko smo unutar skladista
+Poslovnice 1, poslovniceZaTransfer nam je array čiji objekti su poslovnice iz STORE-a, P2-P8. Kada postavljamo 1. put 
+idPoslovnice, trebamo dobro pripaziti da najprije provjerimo postoje li poslovniceZaTransfer. Ukoliko postoje, postavimo
+ID prve u nizu za idPoslovnice, u protivnom, idPoslovnice nam je ''. 

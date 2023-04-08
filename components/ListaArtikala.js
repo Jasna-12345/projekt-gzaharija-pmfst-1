@@ -1,6 +1,5 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
-import { FlatList,Text,View, Button } from 'react-native';
+import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Okvir from './Okvir';
 import BotunTekst from './BotunTekst';
@@ -27,7 +26,6 @@ const Artikal=({artikal,navigation,poslovnica})=>{
         {/*Ovdje smo prebacili 2 botuna iz PregledSkladistaScreen komponente*/}
         <BotunTekst onPress={()=>navigation.navigate('ProdajArtikal',{artikal, poslovnica})}>Prodaj artikal</BotunTekst>
         <BotunTekst onPress={()=>navigation.navigate('PrebaciArtikal',{artikal, poslovnica})}>Prebaci artikal</BotunTekst>
-
     </Okvir>)
 }
 

@@ -2,11 +2,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {View,Text} from "react-native";
 import DetaljiPoslovniceScreen from "./DetaljiPoslovniceScreen";
 import PopisPoslovnicaScreen from "./PopisPoslovnicaScreen";
-import PrebaciArtikalScreen from "./PrebaciArtikalScreen";
 import PregledSkladistaScreen from "./PregledSkladistaScreen";
 import ProdajArtikalScreen from "./ProdajArtikalScreen";
 import UrediPoslovnicuScreen from "./UrediPoslovnicuScreen";
 import ZatvoriPoslovnicuScreen from "./ZatvoriPoslovnicuScreen";
+import PrebaciArtikalScreen from "./PrebaciArtikalScreen";
 import { headerOpcije } from "../components/headerOpcije";
 
 //Poslovnice - nam je stack navigator, koji nas vodi na ekrane
