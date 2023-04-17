@@ -8684,6 +8684,13 @@ react-native-gradle-plugin@^0.0.7:
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.7.tgz#96602f909745239deab7b589443f14fce5da2056"
   integrity sha512-+4JpbIx42zGTONhBTIXSyfyHICHC29VTvhkkoUOJAh/XHPEixpuBduYgf6Y4y9wsN1ARlQhBBoptTvXvAFQf5g==
 
+react-native-input-spinner@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-input-spinner/-/react-native-input-spinner-1.8.0.tgz#91a27ab6ad18cef3e8edacabe01e8fa259a55633"
+  integrity sha512-9h0QpUn8E5fUf+XsSI3WjYjchQQWuGf1PR6+zYX06yn2xxfg4NzRFxYTlT/pesxW9IC6kDc7qvEUPGRRym2WTw==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-iphone-x-helper@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"

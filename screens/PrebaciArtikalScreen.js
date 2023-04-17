@@ -14,6 +14,7 @@ import Artikal from "../models/Artikal";
 import Poslovnica from "../models/Poslovnica";
 import { poslovnicaAction } from "../stores/actions/poslovnicaAction";
 import { POSLOVNICA_ACTION } from "../stores/actions/poslovnicaAction";
+import InputSpinner from "react-native-input-spinner";
 
 const PrebaciArtikalScreen=({route,navigation})=>{
     //Ovdje dolazimo putem gumba Prebaci artikal iz Liste Artikala, odnosno PregledSkladista ekrana, a
@@ -29,13 +30,19 @@ const PrebaciArtikalScreen=({route,navigation})=>{
     const [kolicina, postaviKolicina]=useState(1);
 
     //Moramo izbaciti onu poslovnicu u kojoj se trenutno nalazimo, iz SLIDER komponente, pomoću FILTER-a
-    const poslovniceZaTransfer=useSelector(state=>state.poslovnica.poslovnice.filter(x=>x.id!=poslovnica.id));
+    const poslovniceZaTransfer=useSelector(state=>state.poslovnica.poslovnice.filter(x=> x.id!==poslovnica.id));
+    console.log("POSLOVNICE_ZA_TRANFER: ",poslovniceZaTransfer)
+    console.log("POSLOVNICE_ZA_TRANFER: ",typeof poslovniceZaTransfer[0].id)
     //Ako postoje poslovniceZaTransfer, odaberemo prvu u nizu, a ako ih nema odaberemo ''
     const [idPoslovnice, postaviIdPoslovnice]=useState(poslovniceZaTransfer.length?poslovniceZaTransfer[0].id:'');
+    console.log("ID PPSLOVNICE: ", typeof idPoslovnice);
     
+
 
     const prebaciArtikal=()=>{
         //const [toPoslovnica, setToPoslovnica] = useState(null); 
+
+         console.log("idPOSLOVNICE: ", idPoslovnice);
         
          // KOLIKO ARTIKALA MI OSTAJE NA STANJU, U STORE-U?(UKUPNO NA STORE-u - količina odabrana na SLIDER-u)
          const from_kolicina = artikal.kolicina - kolicina;
@@ -59,10 +66,16 @@ const PrebaciArtikalScreen=({route,navigation})=>{
 
          //AŽURIRAMO POSLOVNICU IZ KOJE ARTIKLE PREBACUJEMO, SVI ATRIBUTI OSTAJU ISTI, OSIM LISTE ARTIKALA(from_artikli)
          const from_poslovnica = new Poslovnica(poslovnica.id, poslovnica.naziv, poslovnica.email, poslovnica.lokacija, from_artikli, poslovnica.zarada);
- 
+         console.log("FROM_POSLOVNICA: ",from_poslovnica)
+
          //DODAVANJE ARTIKALA U ODABRANU POSLOVNICU
          //1. PRONAĐEMO KOJA POSLOVNICA JE ODABRANA POMOĆU PICKER-A
-         const to_poslovnica = poslovniceZaTransfer.find(x => x.id === idPoslovnice);
+         const to_poslovnica = poslovniceZaTransfer.find(x => {
+                    console.log("TIP ID: ",typeof x.id);
+                    console.log("TIP IDPOSLOVNICE: ",typeof idPoslovnice);
+                    console.log("Rezultat: ", x.id===poslovnica.id)
+                return x.id === idPoslovnice
+        });
          console.log("TO_POSLOVNICA: ",to_poslovnica)
          //2. AKO ARTIKAL POSTOJI, U POSLOVNICI ODABRANOJ POMOĆU PICKER-A, 
          if(to_poslovnica.artikli.find(x => x.naziv === artikal.naziv)) {
@@ -111,11 +124,24 @@ const PrebaciArtikalScreen=({route,navigation})=>{
                 maximumValue={artikal.kolicina}
                 step={1}/>{/*STEP - koliki nam je korak na slider-u, da nemamo float vrijednosti*/}
 
+                <InputSpinner
+                    max={artikal.kolicina}
+                    min={1}
+                    step={1}
+                    colorMax={"#f04048"}
+                    colorMin={"#40c5f4"}
+                    color={"#F5911F"}
+                    value={kolicina}
+                    onChange={(val)=>{
+                        postaviKolicina(val);
+                        console.log("Promjena: ", val)
+                        }}/>
+
                 {/*<View style={styles.bottomContainer}>*/}
                     <Text style={styles.sliderValue}>Količina: {kolicina}</Text>
                 {/*</View>*/}   
 
-                <Picker selectedValue={idPoslovnice} onValueChange={postaviIdPoslovnice}>
+                <Picker selectedValue={idPoslovnice} onValueChange={value => postaviIdPoslovnice(Number(value))}>
                     {poslovniceZaTransfer.map(x=><Picker.Item key={x.id} label={x.naziv} value={x.id}/>)}
                 </Picker>
 
