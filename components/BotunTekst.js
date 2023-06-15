@@ -3,7 +3,6 @@ import { BOJA } from "../konstante";
 
 const BotunTekst=(props)=>{
     return <TouchableOpacity style={stilovi.botun} onPress={props.onPress}>
-        {/*Ovo nam se odnosi na bilo kakav tekst koji stoji na botunu*/}
         <Text style={stilovi.tekst}>{props.children}</Text>
     </TouchableOpacity>
 }

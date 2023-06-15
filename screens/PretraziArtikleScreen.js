@@ -1,4 +1,4 @@
-import {View,Text,Button,TextInput} from "react-native";
+import {TextInput} from "react-native";
 import Screen from "../components/Screen";
 import { useSelector } from "react-redux";
 import ListaArtikala from "../components/ListaArtikala";
@@ -11,7 +11,6 @@ const PretraziArtikleScreen=({route,navigation})=>{
     //LISTA ARTIKALA(komponenta) nam prima poslovnice, kao array gdje svaki array item ima PROIZVOD I ARTIKAL, a to vidimo u 
     //PregledSkladistaScreen komponenti
 
-    //Treba nam lista poslovnica
     const poslovnice=useSelector(state=>state.poslovnica.poslovnice);
 
     //Za praćenje vrijednosti textInput elementa
@@ -25,21 +24,18 @@ const PretraziArtikleScreen=({route,navigation})=>{
 
             const nazivLowercase=artikal.naziv.toLowerCase();
             const trazilicaLowercase=trazilica.toLowerCase();
-            //Ako ono što je korisnik unio u TextInput element sadrzi barem jedno slovo iz trazilice, mi samo te artikle ostavljamo,
-            //pushamo ih u acumulator, u ovom slucaju u LISTU, koja je inicijalno prazna 
+
             if(nazivLowercase.includes(trazilicaLowercase)){
                 //Sada će imati listu proizvoda, PROIZVOD={POSLOVNICA, ARTIKAL}
                 acumulator.push({poslovnica,artikal});
             }
         })
         return acumulator;
-    },[])//Početna vrijednost akumulatora je [], jer mi obe OBJEKTE spremamo opet u array
+    },[])
 
 
     return(
     <Screen>
-        {/*<Text>Korisnik ima mogućnost pretrage artikala(make-up proizvoda)</Text>
-        <Button onPress={()=>navigation.navigate('ProdajaArtikla')} title="Prodaj artikal"></Button>*/}
 
         {/*LABELA ZA UNOS*/}
         <TextInput placeholder="Pretraži željeni artikal" onChangeText={postaviTrazilica} value={trazilica} style={styles.textInput}/>
@@ -66,7 +62,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
       marginBottom: 10,
       fontWeight: 'bold',
-      fontFamily: 'Times New Roman',
+      fontFamily: 'Roboto',
     },
     input:{
         marginTop:5,

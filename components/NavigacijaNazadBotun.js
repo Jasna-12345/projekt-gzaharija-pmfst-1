@@ -3,8 +3,9 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { HeaderBackButton } from '@react-navigation/elements'
 
-//Prima props od headerLeft-a, a to nam je 
+//Prima props od headerLeft-a, od komponente headerOpcije
 const NavigacijaNazadBotun = (props) => {
+    //navigation objekt ovdje nije dostupan putem props, zato mu pristupamo preko HOOK useNavigation
     const navigation=useNavigation();
 
     //Jesmo li na početku ekrana TabPretraziArtikle, ako jesmo vrati null, a ako nismo možemo ići natrag

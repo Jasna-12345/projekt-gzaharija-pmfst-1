@@ -2,8 +2,11 @@
 import {DrawerToggleButton} from '@react-navigation/drawer';
 import NavigacijaNazadBotun from './NavigacijaNazadBotun';
 
+//Dodajemo svugdje gdje se mozemo vratiti natrag - BACK botun(STACK NAVIGACIJA)
+
 export const headerOpcije={
-    //S lijeve strane će nam uvijek biti ikona za drawer navigaciju, hamburger menu
+    //LIJEVO -  hamburger menu
     headerLeft: DrawerToggleButton,
+    //DESNO - botun NATRAG 
     headerRight: NavigacijaNazadBotun
 }

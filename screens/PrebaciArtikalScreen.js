@@ -40,21 +40,19 @@ const PrebaciArtikalScreen=({route,navigation})=>{
 
 
     const prebaciArtikal=()=>{
-        //const [toPoslovnica, setToPoslovnica] = useState(null); 
 
-         console.log("idPOSLOVNICE: ", idPoslovnice);
+         //console.log("idPOSLOVNICE: ", idPoslovnice);
         
-         // KOLIKO ARTIKALA MI OSTAJE NA STANJU, U STORE-U?(UKUPNO NA STORE-u - količina odabrana na SLIDER-u)
+         // KOLIKO ARTIKALA MI OSTAJE NA STANJU, U STORE-U?
          const from_kolicina = artikal.kolicina - kolicina;
 
          //Modificiramo artikle iz 1.poslovnice
          let from_artikli;
-         //Više nema tog artikla, jer mu je količina 0 -> trebamo ga izbaciti iz liste artikala
+         //Više nema tog artikla, količina=0 -> IZBACI
          if(from_kolicina === 0) {
              from_artikli = poslovnica.artikli.filter(x => x.naziv !== artikal.naziv);
          }else {
-            //AKO KOLIČINA ARTIKALA NA STANJU NIJE 0, pronađemo taj artikal i zamijenimo cijeli artikal
-            //Pomocu konstruktora definiranog u modelima, s novom vrijednosti količine, ostali atributi ostaju isti
+            //AKO KOLIČINA ARTIKALA NA STANJU NIJE 0, pronađemo taj artikal i zamijenimo cijeli artikal(nova kolicina)
              from_artikli = poslovnica.artikli.map(x => {
                  if(x.naziv === artikal.naziv) {
                      return new Artikal(artikal.naziv,artikal.nabavna_cijena, artikal.prodajna_cijena, from_kolicina);
@@ -69,15 +67,13 @@ const PrebaciArtikalScreen=({route,navigation})=>{
          console.log("FROM_POSLOVNICA: ",from_poslovnica)
 
          //DODAVANJE ARTIKALA U ODABRANU POSLOVNICU
-         //1. PRONAĐEMO KOJA POSLOVNICA JE ODABRANA POMOĆU PICKER-A
+         //1. KOJA POSLOVNICA JE ODABRANA POMOĆU PICKER-A
          const to_poslovnica = poslovniceZaTransfer.find(x => {
-                    console.log("TIP ID: ",typeof x.id);
-                    console.log("TIP IDPOSLOVNICE: ",typeof idPoslovnice);
-                    console.log("Rezultat: ", x.id===poslovnica.id)
                 return x.id === idPoslovnice
         });
          console.log("TO_POSLOVNICA: ",to_poslovnica)
-         //2. AKO ARTIKAL POSTOJI, U POSLOVNICI ODABRANOJ POMOĆU PICKER-A, 
+
+         //2. AKO ARTIKAL POSTOJI, U POSLOVNICI ODABRANOJ POMOĆU PICKER-A - AZURIRAJ KOLICINU 
          if(to_poslovnica.artikli.find(x => x.naziv === artikal.naziv)) {
              // U ARTIKLIMA TE POSLOVNICE pronađi ovaj artikal kojeg prebacujemo, i DODAJ mu količinu koju mi prebacujemo iz 1.poslovnice
              to_poslovnica.artikli = to_poslovnica.artikli.map(x => {
@@ -85,21 +81,18 @@ const PrebaciArtikalScreen=({route,navigation})=>{
                      return new Artikal(x.naziv, x.nabavna_cijena,
                          x.prodajna_cijena, x.kolicina + kolicina)
                  }else {
-                    //Inače, samo vrati taj artikal 
                      return x;
                  }
              })
          }else {
-             // AKO ARTIKAL NE POSTOJI U ODABRANOJ POSLOVNICI, dosadasnjim artiklima te poslovnice, dodaj OVAJ ARTIKAL, 
-             //pomoću konstruktora ARTIKLA definiranog u modelima(sve vrijednosti atributa ostaju iste, samo je količina 
-             //jednaka količini iz slider-a) 
+            //NOVI ARTIKAL DODJEMO U postojeću poslovnicu
              to_poslovnica.artikli = [...to_poslovnica.artikli, new Artikal(artikal.naziv, artikal.nabavna_cijena, artikal.prodajna_cijena, kolicina)];
          }
  
-         //OTPREMI, pošalji na store POSLOVNICU od koje prebacujemo artikle, s ažuriranom LISTOM ARTIKALA
+         //OTPREMI POSLOVNICU od koje prebacujemo artikle, s ažuriranom LISTOM ARTIKALA
          dispatch(poslovnicaAction(POSLOVNICA_ACTION.UPDATE_POSLOVNICA, from_poslovnica));
  
-         //OTPREMI, pošalji na store POSLOVNICU kojoj prebacujemo artikle, s ažuriranom LISTOM ARTIKALA
+         //OTPREMI POSLOVNICU kojoj prebacujemo artikle, s ažuriranom LISTOM ARTIKALA
          dispatch(poslovnicaAction(POSLOVNICA_ACTION.UPDATE_POSLOVNICA, to_poslovnica));
  
          navigation.goBack();
@@ -119,27 +112,26 @@ const PrebaciArtikalScreen=({route,navigation})=>{
                 {/*SLIDER-korisnik odabire koliko artikala prodaje*/}
                 <Slider 
                 value={kolicina}
-                onValueChange={postaviKolicina}
+                onValueChange={postaviKolicina} 
                 minimumValue={1}
                 maximumValue={artikal.kolicina}
-                step={1}/>{/*STEP - koliki nam je korak na slider-u, da nemamo float vrijednosti*/}
+                step={1}/>{/*STEP da nemamo float vrijednosti*/}
 
                 <InputSpinner
                     max={artikal.kolicina}
                     min={1}
                     step={1}
-                    colorMax={"#f04048"}
-                    colorMin={"#40c5f4"}
-                    color={"#F5911F"}
+                    color={"#09910d"}
                     value={kolicina}
                     onChange={(val)=>{
                         postaviKolicina(val);
                         console.log("Promjena: ", val)
-                        }}/>
+                        }}
+                    background={"#55ff5e"}
+                    textColor={"#000000"}/>
 
-                {/*<View style={styles.bottomContainer}>*/}
                     <Text style={styles.sliderValue}>Količina: {kolicina}</Text>
-                {/*</View>*/}   
+
 
                 <Picker selectedValue={idPoslovnice} onValueChange={value => postaviIdPoslovnice(Number(value))}>
                     {poslovniceZaTransfer.map(x=><Picker.Item key={x.id} label={x.naziv} value={x.id}/>)}

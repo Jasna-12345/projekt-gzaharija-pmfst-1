@@ -1,7 +1,7 @@
-//Komponenta za dodavanje nove poslovnice, i za EDIT postojeće 
+//Komponenta za DODAVANJE NOVE, i EDIT postojeće poslovnice(AKO JE PROSLIJEĐENA kao props)
 import React from 'react';
-import { Button,Text, TextInput,View } from 'react-native';
-import { useState,useEffect } from 'react';
+import { TextInput,View } from 'react-native';
+import { useState} from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { POSLOVNICA_ACTION } from '../stores/actions/poslovnicaAction';
@@ -13,32 +13,29 @@ import TekstLabel from './TekstLabel';
 import { BOJA } from '../konstante';
 import BotunTekst from './BotunTekst';
 
-//Ako se kao parametar pošalje poslovnica, mi tu poslovnicu uređujemo, a ako je nema, mi dodajemo novu 
-//poslovnicu u naš STORE
+//Ako se kao parametar pošalje poslovnica -- UPDATE,  inače ADD na store
 const FormaPoslovnica = ({poslovnica}) => {
 
-  //Varijabla iz REACT STORE-a koju možemo iskoristiti za kreiranje ID-a nove poslovnice
   const next_id=useSelector(state=>state.poslovnica.next_id);
 
-  const navigation=useNavigation();//Za povratak na početnu str nakon dodavanja nove poslovnice
+  const navigation=useNavigation();
   const [naziv, postaviNaziv]=useState(poslovnica ? poslovnica.naziv : ' ');
   const [email, postaviEmail]=useState(poslovnica ? poslovnica.email : ' ');
   const [lokacija, postaviLokaciju]=useState(poslovnica ? poslovnica.lokacija : ' ');
 
-  //Varijabla za provjeru je li poslovnica kreirana. Ako jeDodano===true, nemamo poslovnicu kao parametar
-  const jeDodavanje = poslovnica === undefined; //Ako nema poslovnice, ovo je TRUE(trebamo dodati poslovnicu), inače FALSE
+  //ADD ili UPDATE poslovnice
+  const jeDodavanje = poslovnica === undefined; 
   
 
   const provjeriPostavljanjeNaziva = (text) => {
     postaviNaziv(text);
-    //console.log(`Nova vrijednost naziva: ${naziv}`); // ovdje ispisujemo stanje naziva nakon promjene
+    //console.log(`Nova vrijednost naziva: ${naziv}`); 
   };
 
   
-  //Kreiranu poslovnicu ćemo dodati u naš REDUX STORE, pomoću useDispatch() - OBAVEZNO IDE VAN FUNKCIJE submitForm
+  //Kreiranu poslovnicu ćemo dodati u naš REDUX STORE
   const dispatch=useDispatch();
 
-  //Funkcija za resetiranje forme na početne vrijednosti
   const resetForme = () => {
     postaviNaziv('');
     postaviEmail('');
@@ -48,42 +45,30 @@ const FormaPoslovnica = ({poslovnica}) => {
   const submitForm=()=>{
     //Ako jeDodavanje===true, dodajemo poslovnicu, akcija je ADD_POSLOVNICA
     if(jeDodavanje){
-        //Kreiramo novu poslovnicu iz konstruktora
         const novaPoslovnica = new Poslovnica(next_id,naziv,email,lokacija);
 
-        
-        //dispatch funkciji šaljemo poslovnicaAction koji prima TIP i PODATKE(provjerimo u STORES-poslovnicaAction)
-        //TIP će nam biti POSLOVNICA_ACTION.ADD_POSLOVNICA(ADD_POSLOVNICA: "poslovnica/add"--> ovdje smo to vidjeli),
-        //a podaci će nam biti upravo ova poslovnica, koju smo već kreirali
+    
         dispatch(poslovnicaAction(POSLOVNICA_ACTION.ADD_POSLOVNICA,novaPoslovnica))
 
-        //Kada smo dodali novu poslovnicu, želimo se vratiti na DRAWER Početna, odnosno na TabPočetna
-        navigation.navigate('TabPocetna')//navodimo NAME svojstvo rute
-    }else{
+        navigation.navigate('TabPocetna')
         //a ako uređujemo, jeDodavanje===false, akcija je UPDATE_POSLOVNICA
 
         //Kao akcju dohvaćamo ID postojeće poslovnice
         const updatePoslovnica = new Poslovnica(poslovnica.id,naziv,email,lokacija);
 
         
-        //dispatch funkciji šaljemo poslovnicaAction koji prima TIP i PODATKE(provjerimo u STORES-poslovnicaAction)
-        //TIP će nam biti POSLOVNICA_ACTION.ADD_POSLOVNICA(ADD_POSLOVNICA: "poslovnica/add"--> ovdje smo to vidjeli),
-        //a podaci će nam biti upravo ova poslovnica, koju smo već kreirali
         dispatch(poslovnicaAction(POSLOVNICA_ACTION.UPDATE_POSLOVNICA,updatePoslovnica))
 
-        //Kada smo dodali novu poslovnicu, želimo se vratiti UrediPoslovnicuScreen, a on nam je samo za 1 screen prije ovog
-        navigation.goBack()//znamo da se  vraćamo za 1 screen natrag
+        navigation.goBack()
     }
     
-    //čistimo polja forme za iduću poslovnicu
     resetForme()
 
   }
 
   return (
-    <View style={{margin:20}}>
+    <View  style={{margin:20}}>
         <TekstLabel>Naziv poslovnice: </TekstLabel>
-        {/*Inače bi i ovdje kao onChangeText imali postaviNaziv, samo zbog provjere koristim provjeriPostavljanjeNaziva*/}
         <TextInput placeholder="Naziv poslovnice" onChangeText={provjeriPostavljanjeNaziva} value={naziv} style={styles.textInput}/>
 
         <TekstLabel>Email poslovnice: </TekstLabel>
@@ -105,7 +90,7 @@ const styles = StyleSheet.create({
       borderColor: '#ccc',
       borderWidth: 1,
       padding: 10,
-      color: 'grey', // ovdje postavite željenu boju slova
+      color: 'grey', // boja slova na formi 
       backgroundColor: '#fff',
       borderRadius: 5,
       borderWidth: 1,
@@ -113,7 +98,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
       //margin:20,
       fontWeight: 'bold',
-      fontFamily: 'Times New Roman',
+      fontFamily: 'Roboto',
     },
     input:{
         margin:20,

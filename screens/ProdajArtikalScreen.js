@@ -14,34 +14,29 @@ import { POSLOVNICA_ACTION } from "../stores/actions/poslovnicaAction";
 import { poslovnicaAction } from "../stores/actions/poslovnicaAction";
 
 const ProdajArtikalScreen=({route, navigation})=>{
-    //Ovdje dolazimo iz PopisPoslovnicaScreen, odnosno komponente ListaPoslovnica, gdje nam je kao route navigaation funkciji poslan
-    //naziv ovog ekrana, a kao parametri su poslani {artikal i poslovnica}
-    //<BotunTekst onPress={()=>navigation.navigate('ProdajArtikal',{artikal, poslovnica})}>Prodaj artikal</BotunTekst>
     const{artikal,poslovnica}=route.params;
 
-    const [kolicina, postaviKolicina]=useState(1);
+    const [kolicina, postaviKolicina]=useState(1); //Količina koju smo prodali
 
     const dispatch=useDispatch();
     const prodajArtikal=()=>{
-        //NOVA ZARADA POSLOVNICE
         const nova_zarada=poslovnica.zarada+kolicina*(artikal.prodajna_cijena-artikal.nabavna_cijena);
-        //MORAMO OSVJEZITI KOLICINU AKO JE DOSLO DO PRODAJE - nova_kolicina
         const nova_kolicina=artikal.kolicina-kolicina;
 
         //UPDATE LISTE ARTIKALA
         let novi_artikli;
         //Ako smo sve artikle tipa Bronzer prodali
         if(nova_kolicina==0){
-            //Izbacujemo da iz liste artikala poslovnice
+            //Izbacujemo ga iz liste artikala poslovnice
             novi_artikli=poslovnica.artikli.filter(x=>x.naziv!=artikal.naziv);
         }else{
             //Ako nismo prodali sve artikle 
             novi_artikli=poslovnica.artikli.map(x=>{
-                //Ako smo u listi artikala prnasli taj artikal, vrati novi koji ima UPDATE KOLICINE 
+                //Ako smo u listi artikala pronasli taj artikal, vrati novi koji ima UPDATE KOLICINE 
                 if(x.naziv ===artikal.naziv){
                     return new Artikal(artikal.naziv, artikal.nabavna_cijena, artikal.prodajna_cijena,nova_kolicina);
                 }else{
-                    //Ako to nije taj artikal, samo ga vrati nepromijenjenog
+                    //Ako nije taj, vrati nepromijenjenog
                     return x;
                 }
             })
@@ -51,9 +46,7 @@ const ProdajArtikalScreen=({route, navigation})=>{
         const nova_poslovnica=new Poslovnica(poslovnica.id, poslovnica.naziv, poslovnica.email, poslovnica.lokacija, novi_artikli, 
             nova_zarada);
 
-        //Sada i novu kolicinu i poslovnicu moramo poslati preko DISPATCH funkcije na STORE, global state management. 
         dispatch(poslovnicaAction(POSLOVNICA_ACTION.UPDATE_POSLOVNICA,nova_poslovnica));
-        //Koristimo akciju UPDATE POSLOVNICE, a ta akcija nam prihvaća NOVU POSLOVNICU, SA AŽURIRANIM STANJEM
 
         navigation.goBack();
 

@@ -2,8 +2,8 @@ import { Text, StyleSheet } from "react-native";
 import { BOJA } from "../konstante";
 
 
-const TekstNaslov=({children})=>{
-    return(<Text style={styles.naslov}>
+const TekstNaslov=({children,boja})=>{
+    return(<Text style={boja}>
         {children}
     </Text>
 )}
@@ -15,7 +15,7 @@ const styles=StyleSheet.create({
         textAlign:'center',
         fontSize:24,
         fontWeight:'bold',
-        color:BOJA.NASLOV_TEKST,
+        //color:BOJA.NASLOV_TEKST,
         marginBottom:30,
     },
 })

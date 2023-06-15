@@ -1,5 +1,9 @@
+//Da možemo fino prikazati NAZIV, PRODAJU I NABAVNU CIJENU te količinu ARTIKALA neke poslovnice ili 
+//izlistati polja kao DETALJE POSLOVNICE na DetaljiPoslovniceScreen
+
 import { Text, StyleSheet, View } from "react-native";
 import { BOJA } from "../konstante";
+
 
 const PrikazPolja=({polja})=>{
     return(<View>

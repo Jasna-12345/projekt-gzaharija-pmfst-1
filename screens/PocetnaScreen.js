@@ -14,7 +14,7 @@ const PocetnaScreen=({route, navigation})=>{
     const zarada=poslovnice.reduce((acumulator,poslovnica)=>{
         //Za svaku poslovnicu, x u akumulator ćemo dodati zaradu te poslovnice, te vraćamo akum. kako bi se u sljedećoj iteraciji 
         //funkcije on povecao za tu vrijednost 
-        acumulator+=poslovnica.zarada;
+        acumulator+=parseInt(poslovnica.zarada);
         return acumulator;
     }, 0);//inicijalna vrijednost akumultora nam je 0
      
@@ -22,7 +22,7 @@ const PocetnaScreen=({route, navigation})=>{
     const kolicina=poslovnice.reduce((acc,poslovnica)=>{
         //artikliPoslovnice nam je BROJ artikala jedne poslovnice
         const artikliPoslovnice = poslovnica.artikli.reduce((akumulator,artikal)=>{
-            akumulator+=artikal.kolicina;
+            akumulator+=parseInt(artikal.kolicina);
             return akumulator;
         },0)//JAKO BITNO - definirati početnu vrijednost akumulatora
 

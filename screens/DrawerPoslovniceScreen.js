@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import {View,Text} from "react-native";
 import DetaljiPoslovniceScreen from "./DetaljiPoslovniceScreen";
 import PopisPoslovnicaScreen from "./PopisPoslovnicaScreen";
 import PregledSkladistaScreen from "./PregledSkladistaScreen";
@@ -22,7 +21,6 @@ const Stack=createNativeStackNavigator();
 const DrawerPoslovniceScreen=()=>{
     return(
     <Stack.Navigator screenOptions={headerOpcije}>
-        {/*5. options={{title: "Popis Poslovnica"}} --> DODALI SMO SVE NASLOVE, DA NAM OKEJ IZGLEDAJU*/}
         <Stack.Screen name="PopisPoslovnica" component={PopisPoslovnicaScreen} options={{title: "Popis Poslovnica"}}/>
         <Stack.Screen name="DetaljiPoslovnice" component={DetaljiPoslovniceScreen} options={{title: "Detalji Poslovnice"}}/>
         <Stack.Screen name="UrediPoslovnicu" component={UrediPoslovnicuScreen} options={{title: "Uredi Poslovnicu"}}/>

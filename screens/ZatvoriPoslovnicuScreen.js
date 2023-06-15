@@ -7,6 +7,7 @@ import { poslovnicaAction } from "../stores/actions/poslovnicaAction";
 import { POSLOVNICA_ACTION } from "../stores/actions/poslovnicaAction";
 
 const ZatvoriPoslovnicuScreen=({route,navigation})=>{
+    //Mogli smo i route.params;
     const poslovnica= route.params.poslovnica;
 
     const dispatch=useDispatch();
